@@ -292,3 +292,53 @@ Nursey
 Overall Matches --- 104 
 Win / Loss Record --- 69--35 
 Winning Percentage --- 66%
+
+okiewaka 
+Overall Matches --- 13 
+Win / Loss Record --- 0--13 
+Winning Percentage --- 0% 
+
+paddie 
+Overall Matches --- 108 
+Win / Loss Record --- 70--38 
+Winning Percentage --- 65% 
+
+Paragon
+Overall Matches --- 73  
+Win / Loss Record --- 38--35 
+Winning Percentage --- 52% 
+
+pheLoN 
+Overall Matches --- 76 
+Win / Loss Record --- 36--40 
+Winning Percentage --- 47% 
+
+phlps 
+Overall Matches --- 32 
+Win / Loss Record --- 11--21 
+Winning Percentage --- 34% 
+
+phorofor 
+Overall Matches --- 104 
+Win / Loss Record --- 64--40 
+Winning Percentage --- 62% 
+
+Platinum 
+Overall Matches --- 287
+Win / Loss Record --- 183--104  
+Winning Percentage --- 64% 
+
+powah
+Overall Matches --- 12 
+Win / Loss Record --- 7--5 
+Winning Percentage --- 58% 
+
+PurpleShirt
+Overall Matches --- 86 
+Win / Loss Record --- 50--36 
+Winning Percentage --- 58% 
+
+PYYYOUR 
+Overall Matches --- 139 
+Win / Loss Record --- 100--39 
+Winning Percentage --- 72% 
