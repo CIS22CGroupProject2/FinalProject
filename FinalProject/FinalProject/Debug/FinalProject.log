@@ -1,10 +1,3 @@
-<<<<<<< HEAD
 ﻿  main.cpp
+  LINK : C:\Users\Nathan\Documents\GitHub\FinalProject\FinalProject\Debug\FinalProject.exe not found or not built by the last incremental link; performing full link
   FinalProject.vcxproj -> C:\Users\Nathan\Documents\GitHub\FinalProject\FinalProject\Debug\FinalProject.exe
-=======
-﻿  Hash.cpp
-  main.cpp
-c:\users\peter kirov\documents\github\finalproject\finalproject\finalproject\main.cpp(9): warning C4101: 'index': unreferenced local variable
-  Generating Code...
-  FinalProject.vcxproj -> C:\Users\Peter Kirov\Documents\GitHub\FinalProject\FinalProject\Debug\FinalProject.exe
->>>>>>> f27bc099f523474be14f442e2747417f92440c6b

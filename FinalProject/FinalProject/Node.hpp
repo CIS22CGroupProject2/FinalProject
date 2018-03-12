@@ -3,10 +3,6 @@
 // Node for BST 
 //**************************
 
-
-
-
-
 template<class T> 
 class Node
 {
