@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="BST.hpp" />
     <ClInclude Include="Hash.h" />
+    <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="BSTNode.hpp" />
   </ItemGroup>

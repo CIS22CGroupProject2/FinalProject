@@ -15,9 +15,7 @@ new list, add anywhere, delete anywhere, find anywhere,
 count of items in the list, empty the list, etc.
 */
 
-#ifndef LIST_H
-#define LIST_H
-#include "Node.h"
+#include "LinkedListNode.h"
 
 /*
 To make an array have linked lists
