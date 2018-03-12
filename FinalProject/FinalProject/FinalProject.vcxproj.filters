@@ -29,10 +29,10 @@
     <ClInclude Include="BST.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.hpp">
+    <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="BSTNode.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
