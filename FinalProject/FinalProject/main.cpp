@@ -23,8 +23,11 @@ int main()
 void fileInput(List<struct player> &Data)
 {
 	ifstream infile;
+	int count = 0;
 	player adding;
 	char taking;
+	string taking1;
+
 	infile.open("players.txt");
 	if (!infile)
 	{
@@ -37,13 +40,33 @@ void fileInput(List<struct player> &Data)
 		while (!infile.eof())
 		{
 			getline(infile, adding.name);
-			for (int x = 0; x < 15; x++)
+			for (int x = 0; x < 17; x++)
 			{
 				infile >> taking;
-				cout << taking;
-				cout << x;
 			}
+			infile >> adding.matches;
+			getline(infile, taking1);
+			for (int x = 0; x < 17; x++)
+			{
+				infile >> taking;
+			}
+			infile >> adding.wins;
+			for (int x = 0; x < 2; x++)
+			{
+				infile >> taking;
+			}
+			infile >> adding.losses;
+			getline(infile, taking1);
+			for (int x = 0; x < 20; x++)
+			{
+				infile >> taking;
+			}
+			infile >> adding.winPercent;
+			getline(infile, taking1);
+			getline(infile, taking1);
+			count++;
 		}
+		cout << count;
 	}
 }
 
