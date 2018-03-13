@@ -120,8 +120,9 @@
   <ItemGroup>
     <ClInclude Include="BST.hpp" />
     <ClInclude Include="Hash.h" />
+    <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="Node.hpp" />
+    <ClInclude Include="BSTNode.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

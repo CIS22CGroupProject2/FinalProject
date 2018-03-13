@@ -4,7 +4,7 @@
 // operations.
 //***********************************************
 
-#include "Node.hpp"
+#include "BSTNode.hpp"
 #include <iostream>
 
 using namespace std;
