@@ -12,6 +12,8 @@ private:
 	Node<T> *right;
 
 public:
+	//default constructor
+	Node() {}
 	//constructor
 	Node(T x) { data = x; left = nullptr; right = nullptr; }
 	
@@ -24,6 +26,7 @@ public:
 	//getters and setters for right child
 	void setRight(Node<T> *r) { right = r; }
 	Node<T> *getRight() { return right; }
+
 
 	//destructor
 	virtual ~Node() {}

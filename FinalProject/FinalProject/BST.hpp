@@ -23,7 +23,6 @@ public:
 
 
 	// getters and setters for root
-	void setRoot(Node<T> * r) { root = r; }
 	Node<T> *getRoot() { return root; }
 
 	// returns count of nodes in BST
@@ -151,8 +150,15 @@ void BST<T>::addNode(T d)
 	// create new node and store data 
 	newNode = new Node<T>(d);
 
-	// call append to add node in approp. place.
-	append(root, newNode);
+	if (!root)
+	{
+		root = newNode;
+	}
+	else
+	{
+		// call append to add node in approp. place.
+		append(root, newNode);
+	}
 	// increment count
 	count++;
 }
@@ -169,6 +175,8 @@ void BST<T>::append(Node<T> *nodePtr, Node<T> *newNode)
 	// assign root the new value/data
 	if (nodePtr == nullptr)
 	{
+
+		// assign new node to specified root
 		nodePtr = newNode;
 	}
 	else
@@ -180,6 +188,7 @@ void BST<T>::append(Node<T> *nodePtr, Node<T> *newNode)
 			if (nodePtr->getLeft() != nullptr)
 			{
 				append(nodePtr->getLeft(), newNode);
+
 			}
 			else
 			{
@@ -384,9 +393,20 @@ void BST<T>::breadthTraversal(Node<T> *nodePtr)
 	}
 	else
 	{
-		cout << nodePtr->getLeft() << endl;
-		cout << nodePtr->getRight() << endl;
+		cout << nodePtr->getData() << endl;
 
+		if (nodePtr->getLeft() != nullptr)
+		{
+			cout << nodePtr->getData() << endl;
+		}
+		else if (nodePtr->getRight() != nullptr)
+		{
+			cout << nodePtr->getData() << endl;
+		}
+		else
+		{
+			return;
+		}
 	}
 }
 template<class T>
