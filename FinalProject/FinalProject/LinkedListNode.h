@@ -16,6 +16,7 @@ or as a simple data node in which case you will need a new head pointing node.
 
 #ifndef LINKEDLISTNODE_H
 #define LINKEDLISTNODE_H
+#include <string>
 template <class T>
 class Node
 {
@@ -40,4 +41,12 @@ public:
 		next = nullptr;
 	}
 };
+
+struct player
+{
+	string name;
+	int matches, wins, losses, winPercent;
+	player* next;
+};
+
 #endif

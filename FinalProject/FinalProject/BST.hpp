@@ -11,11 +11,11 @@ using namespace std;
 
 
 template<class T>
-class BST : protected Node<T>
+class BST : protected BSTNode<T>
 {
 private:
 	int count;
-	Node<T> *root;
+	BSTNode<T> *root;
 
 public:
 	//defautl constructor
@@ -23,7 +23,7 @@ public:
 
 
 	// getters and setters for root
-	Node<T> *getRoot() { return root; }
+	BSTNode<T> *getRoot() { return root; }
 
 	// returns count of nodes in BST
 	int getCount() { return count; }
@@ -32,11 +32,11 @@ public:
 	bool isEmpty();
 
 	//check if there is left/right child
-	bool Left(Node<T> *check);
-	bool Right(Node<T> *check);
+	bool Left(BSTNode<T> *check);
+	bool Right(BSTNode<T> *check);
 
 	// add new data
-	void append(Node<T> *nodeptr, Node<T> *newNode);
+	void append(BSTNode<T> *nodeptr, BSTNode<T> *newNode);
 	// to create a new node
 	void addNode(T d);
 	/*
@@ -60,21 +60,21 @@ public:
 	*/
 	// for breadth traversal
 	void breadth();
-	void breadthTraversal(Node<T> *nodePtr);
+	void breadthTraversal(BSTNode<T> *nodePtr);
 
 	// search for data
 	bool Search(T x);
 
 	// deletion in BST
 	void remove(T val);
-	void deleteNode(T val, Node<T> *nodePtr);
-	void deletion(Node<T> *nodePtr);
+	void deleteNode(T val, BSTNode<T> *nodePtr);
+	void deletion(BSTNode<T> *nodePtr);
 
 	//destructor
 	// deletes BST
 	~BST()
 	{
-		Node<T> *nodePtr;
+		BSTNode<T> *nodePtr;
 		nodePtr = root;
 
 
@@ -84,7 +84,7 @@ public:
 		}
 	}
 
-	void destroyRec(Node<T> *nodeptr)
+	void destroyRec(BSTNode<T> *nodeptr)
 	{
 		if (nodeptr)
 		{
@@ -114,7 +114,7 @@ bool BST<T>::isEmpty()
 }
 
 template<class T>
-bool BST<T>::Left(Node<T> *check)
+bool BST<T>::Left(BSTNode<T> *check)
 {
 	// if there is a left child 
 	// return true
@@ -126,7 +126,7 @@ bool BST<T>::Left(Node<T> *check)
 }
 
 template<class T>
-bool BST<T>::Right(Node<T> *check)
+bool BST<T>::Right(BSTNode<T> *check)
 {
 	// if there is a right child
 	// return true
@@ -145,10 +145,10 @@ bool BST<T>::Right(Node<T> *check)
 template<class T>
 void BST<T>::addNode(T d)
 {
-	Node<T> *newNode;
+	BSTNode<T> *newNode;
 
 	// create new node and store data 
-	newNode = new Node<T>(d);
+	newNode = new BSTNode<T>(d);
 
 	if (!root)
 	{
@@ -169,7 +169,7 @@ void BST<T>::addNode(T d)
 //place.
 //**********************************************
 template<class T>
-void BST<T>::append(Node<T> *nodePtr, Node<T> *newNode)
+void BST<T>::append(BSTNode<T> *nodePtr, BSTNode<T> *newNode)
 {
 	// if BST is empty 
 	// assign root the new value/data
@@ -269,7 +269,7 @@ cout << nodePtr->getData() << endl;
 template<class T>
 bool BST<T>::Search(T x)
 {
-	Node<T> *newNode = root;
+	BSTNode<T> *newNode = root;
 
 	while (nodePtr)
 	{
@@ -307,7 +307,7 @@ void BST<T>::remove(T val)
 // tree appropiately.
 //*****************************************
 template<class T>
-void BST<T>::deleteNode(T val, Node<T> *nodePtr)
+void BST<T>::deleteNode(T val, BSTNode<T> *nodePtr)
 {
 	if (val < nodePtr->getData())
 	{
@@ -329,7 +329,7 @@ void BST<T>::deleteNode(T val, Node<T> *nodePtr)
 // by finding he smallest in the left tree
 //******************************************
 template<class T>
-void BST<T>::deletion(Node<T> *nodePtr)
+void BST<T>::deletion(BSTNode<T> *nodePtr)
 {
 	Node<T> *temp = nullptr;
 
@@ -384,7 +384,7 @@ void BST<T>::deletion(Node<T> *nodePtr)
 //**********************************************
 
 template<class T>
-void BST<T>::breadthTraversal(Node<T> *nodePtr)
+void BST<T>::breadthTraversal(BSTNode<T> *nodePtr)
 {
 
 	if (nodePtr == nullptr)

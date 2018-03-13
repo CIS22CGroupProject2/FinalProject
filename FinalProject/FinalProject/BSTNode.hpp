@@ -4,30 +4,30 @@
 //**************************
 
 template<class T> 
-class Node
+class BSTNode
 {
 private:
 	T data;
-	Node<T> *left;
-	Node<T> *right;
+	BSTNode<T> *left;
+	BSTNode<T> *right;
 
 public:
 	//default constructor
-	Node() {}
+	BSTNode() {}
 	//constructor
-	Node(T x) { data = x; left = nullptr; right = nullptr; }
+	BSTNode(T x) { data = x; left = nullptr; right = nullptr; }
 	
 	T getData() { return data; }
 	
 	//get and setters for left child
-	void setLeft(Node<T> *l) { left = l; }
-	Node<T> *getLeft() { return left; }
+	void setLeft(BSTNode<T> *l) { left = l; }
+	BSTNode<T> *getLeft() { return left; }
 
 	//getters and setters for right child
-	void setRight(Node<T> *r) { right = r; }
-	Node<T> *getRight() { return right; }
+	void setRight(BSTNode<T> *r) { right = r; }
+	BSTNode<T> *getRight() { return right; }
 
 
 	//destructor
-	virtual ~Node() {}
+	virtual ~BSTNode() {}
 };
