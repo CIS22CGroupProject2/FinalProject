@@ -4,18 +4,19 @@
 // operations.
 //***********************************************
 
-#include "BSTNode.hpp"
+#include "Node.hpp"
+#include "Queue.hpp"
 #include <iostream>
 
 using namespace std;
 
 
 template<class T>
-class BST : protected BSTNode<T>
+class BST : protected Node<T>
 {
 private:
 	int count;
-	BSTNode<T> *root;
+	Node<T> *root;
 
 public:
 	//defautl constructor
@@ -23,7 +24,7 @@ public:
 
 
 	// getters and setters for root
-	BSTNode<T> *getRoot() { return root; }
+	Node<T> *getRoot() { return root; }
 
 	// returns count of nodes in BST
 	int getCount() { return count; }
@@ -32,49 +33,41 @@ public:
 	bool isEmpty();
 
 	//check if there is left/right child
-	bool Left(BSTNode<T> *check);
-	bool Right(BSTNode<T> *check);
+	bool Left(Node<T> *check);
+	bool Right(Node<T> *check);
 
 	// add new data
-	void append(BSTNode<T> *nodeptr, BSTNode<T> *newNode);
+	//void append(Node<T> *nodeptr, Node<T> *newNode);
+	void append(T d);
 	// to create a new node
 	void addNode(T d);
-	/*
-	// to display an inorder traversal
-	void displayInOrder(Node<T> *nodePtr)  ;
-
-	// to display an inorder traversal
-	//void InOrder()
-	//{displayInOrder(root);}
-
-
-	void displayPreOrder() const
-	{displayPreOrder(root);}
-
 
 	// display a post order traversal of BST
 	//void displayPostOrder(Node<T> *nodePtr) const
-	void displayPostOrder() const
-	{displayPostOrder(root); }
+	void displayPostOrder(ofstream &ofs) const
+	{
+		PostOrder(root, ofs);
+	}
 
-	*/
+	void PostOrder(Node<T> *nodePtr, ofstream &ofs) const;
+
+
 	// for breadth traversal
-	void breadth();
-	void breadthTraversal(BSTNode<T> *nodePtr);
+	void breadth(ofstream &ofs);
 
 	// search for data
 	bool Search(T x);
 
 	// deletion in BST
 	void remove(T val);
-	void deleteNode(T val, BSTNode<T> *nodePtr);
-	void deletion(BSTNode<T> *nodePtr);
+	void deleteNode(T val, Node<T> *nodePtr);
+	void deletion(Node<T> *nodePtr);
 
 	//destructor
 	// deletes BST
 	~BST()
 	{
-		BSTNode<T> *nodePtr;
+		Node<T> *nodePtr;
 		nodePtr = root;
 
 
@@ -84,7 +77,7 @@ public:
 		}
 	}
 
-	void destroyRec(BSTNode<T> *nodeptr)
+	void destroyRec(Node<T> *nodeptr)
 	{
 		if (nodeptr)
 		{
@@ -114,7 +107,7 @@ bool BST<T>::isEmpty()
 }
 
 template<class T>
-bool BST<T>::Left(BSTNode<T> *check)
+bool BST<T>::Left(Node<T> *check)
 {
 	// if there is a left child 
 	// return true
@@ -126,7 +119,7 @@ bool BST<T>::Left(BSTNode<T> *check)
 }
 
 template<class T>
-bool BST<T>::Right(BSTNode<T> *check)
+bool BST<T>::Right(Node<T> *check)
 {
 	// if there is a right child
 	// return true
@@ -145,10 +138,10 @@ bool BST<T>::Right(BSTNode<T> *check)
 template<class T>
 void BST<T>::addNode(T d)
 {
-	BSTNode<T> *newNode;
+	Node<T> *newNode;
 
 	// create new node and store data 
-	newNode = new BSTNode<T>(d);
+	newNode = new Node<T>(d);
 
 	if (!root)
 	{
@@ -163,113 +156,72 @@ void BST<T>::addNode(T d)
 	count++;
 }
 
-//*********************************************
-// defined append functioin recursively
-// to add new nodes in BST in approp.
-//place.
-//**********************************************
+//********************************************************************
+// add new nodes in appropoates place in accordance of tree structure
+//********************************************************************
 template<class T>
-void BST<T>::append(BSTNode<T> *nodePtr, BSTNode<T> *newNode)
+void BST<T>::append(T d)
 {
-	// if BST is empty 
-	// assign root the new value/data
-	if (nodePtr == nullptr)
+	if (!root)
 	{
-
-		// assign new node to specified root
-		nodePtr = newNode;
+		root = new Node<T>(d);
+		return;
 	}
-	else
-	{
-		if (nodePtr->getData() < newNode->getData())
-		{
-			// call recursively
-			// with next value.
-			if (nodePtr->getLeft() != nullptr)
-			{
-				append(nodePtr->getLeft(), newNode);
 
-			}
-			else
-			{
-				nodePtr->setLeft(newNode);
-				nodePtr = newNode;
-			}
+	Node<T> *temp = root;
+	Node<T> *parent = nullptr;
+
+	while (temp)
+	{
+		parent = temp;
+		if (d < temp->getData())
+		{
+			temp = temp->getLeft();
 		}
 		else
 		{
-			// call recursively
-			// with next value.
-			if (nodePtr->getRight() != nullptr)
-			{
-				append(nodePtr->getRight(), newNode);
-			}
-			else
-			{
-				nodePtr->setRight(newNode);
-				nodePtr = newNode;
-			}
+			temp = temp->getRight();
 		}
 	}
-}
 
-//****************************************
-// to display inorder traversal
-//****************************************
-/*
-template<class T>
-void BST<T>::displayInOrder(Node<T> *nodePtr)
-{
-if (nodePtr)
-{
-// recusive call to left branch
-displayInOrder(nodePtr->getLeft());
-
-//print out display
-cout << nodePtr->getData() << endl;
-
-// recursive call to right branch
-displayInOrder(nodePtr->getRight());
-}
-}
-//*****************************************
-// to display a pre order traversal
-//*****************************************
-
-template<class T>
-void BST<T>::displayPreOrder(Node<T> *nodePtr) const
-{
-if (nodePtr)
-{
-cout << nodePtr->getData() << endl;
-displayPreOrder(nodePtr->getLeft());
-displayPreOrder(nodePtr->getRight());
+	if (d < parent->getData())
+	{
+		parent->setLeft(new Node<T>(d));
+		count++;
+	}
+	else
+	{
+		parent->setRight(new Node<T>(d));
+		count++;
+	}
 
 }
-}
+
 
 //*****************************************
 // to display a post order traversal
 //*****************************************
 template<class T>
-void BST<T>::displayPostOrder(Node<T> *nodePtr) const
+void BST<T>::PostOrder(Node<T> *nodePtr, ofstream &ofs) const
 {
-if (nodePtr)
-{
-displayPreOrder(nodePtr->getLeft());
-displayPreOrder(nodePtr->getRight());
-cout << nodePtr->getData() << endl;
-}
+
+	if (nodePtr)
+	{
+		PostOrder(nodePtr->getLeft(), ofs);
+		PostOrder(nodePtr->getRight(), ofs);
+		cout << nodePtr->getData() << endl;
+		ofs << nodePtr->getData() << endl;
+	}
 }
 //*****************************************
 // to search if a value/data exists within
 // the BST. returns true/false.
 //*****************************************
-*/
+
 template<class T>
 bool BST<T>::Search(T x)
 {
-	BSTNode<T> *newNode = root;
+	Node<T> *newNode = root;
 
 	while (nodePtr)
 	{
@@ -307,7 +259,7 @@ void BST<T>::remove(T val)
 // tree appropiately.
 //*****************************************
 template<class T>
-void BST<T>::deleteNode(T val, BSTNode<T> *nodePtr)
+void BST<T>::deleteNode(T val, Node<T> *nodePtr)
 {
 	if (val < nodePtr->getData())
 	{
@@ -329,7 +281,7 @@ void BST<T>::deleteNode(T val, BSTNode<T> *nodePtr)
 // by finding he smallest in the left tree
 //******************************************
 template<class T>
-void BST<T>::deletion(BSTNode<T> *nodePtr)
+void BST<T>::deletion(Node<T> *nodePtr)
 {
 	Node<T> *temp = nullptr;
 
@@ -369,7 +321,7 @@ void BST<T>::deletion(BSTNode<T> *nodePtr)
 		// reattach left subtree
 		temp->left = nodePtr->left;
 		temp = nodePtr;
-		// reattahe right subtre
+		// reattach right subtre
 
 		temp->right = nodePtr->right;
 		delete temp;
@@ -384,34 +336,35 @@ void BST<T>::deletion(BSTNode<T> *nodePtr)
 //**********************************************
 
 template<class T>
-void BST<T>::breadthTraversal(BSTNode<T> *nodePtr)
+void BST<T>::breadth(ofstream &ofs)
 {
+	ofs << "this is breadth traversal of your data" << endl;
 
-	if (nodePtr == nullptr)
-	{
+	// Base Case
+	if (root == nullptr)
 		return;
-	}
-	else
+
+	// Create an empty queue for level order tarversal
+	Queue<Node<T> *> q;
+
+	Node<T> *temp = root;
+	// Enqueue Root and initialize height
+	q.enqueue(temp);
+
+	while (q.getNum() != 0)
 	{
-		cout << nodePtr->getData() << endl;
+		// Print front of queue and remove it from queue
+		temp = q.front();
+		cout << temp->getData() << " ";
+		ofs << temp->getData() << " ";
+		q.dequeue();
 
-		if (nodePtr->getLeft() != nullptr)
-		{
-			cout << nodePtr->getData() << endl;
-		}
-		else if (nodePtr->getRight() != nullptr)
-		{
-			cout << nodePtr->getData() << endl;
-		}
-		else
-		{
-			return;
-		}
+		/* Enqueue left child */
+		if (temp->getLeft() != nullptr)
+			q.enqueue(temp->getLeft());
+
+		/*Enqueue right child */
+		if (temp->getRight() != nullptr)
+			q.enqueue(temp->getRight());
 	}
-}
-template<class T>
-void BST<T>::breadth()
-{
-
-	breadthTraversal(root);
 }
