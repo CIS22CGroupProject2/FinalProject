@@ -1,2 +1,28 @@
 ﻿  main.cpp
-  FinalProject.vcxproj -> C:\Users\asvle\source\repos\FinalProject\FinalProject\Debug\FinalProject.exe
+c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(328): error C2664: 'void Queue<Node<T> *>::enqueue(Node<T>*)': cannot convert argument 1 from 'BSTNode<T> *' to 'Node<T> *'
+          with
+          [
+              T=int
+          ]
+  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(328): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(316): note: while compiling class template member function 'void BST<int>::breadth(void)'
+  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(90): note: see reference to function template instantiation 'void BST<int>::breadth(void)' being compiled
+  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(76): note: see reference to class template instantiation 'BST<int>' being compiled
+c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(333): error C2440: '=': cannot convert from 'Node<T> *' to 'BSTNode<T> *'
+          with
+          [
+              T=int
+          ]
+  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(333): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(340): error C2664: 'void Queue<Node<T> *>::enqueue(Node<T>*)': cannot convert argument 1 from 'BSTNode<T> *' to 'Node<T> *'
+          with
+          [
+              T=int
+          ]
+  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(340): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(344): error C2664: 'void Queue<Node<T> *>::enqueue(Node<T>*)': cannot convert argument 1 from 'BSTNode<T> *' to 'Node<T> *'
+          with
+          [
+              T=int
+          ]
+  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(344): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
