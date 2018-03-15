@@ -123,11 +123,7 @@
     <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="BSTNode.hpp" />
-<<<<<<< HEAD
     <ClInclude Include="LLNode.hpp" />
-=======
-    <ClInclude Include="Queue.h" />
->>>>>>> 884278934b482dd7585a0526a1cfdb5e3004834b
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

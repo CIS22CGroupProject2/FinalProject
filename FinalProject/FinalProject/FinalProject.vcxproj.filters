@@ -38,11 +38,7 @@
     <ClInclude Include="LinkedListNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="LLNode.hpp">
-=======
-    <ClInclude Include="Queue.h">
->>>>>>> 884278934b482dd7585a0526a1cfdb5e3004834b
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

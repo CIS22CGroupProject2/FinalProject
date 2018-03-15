@@ -11,6 +11,9 @@ void fileInput(List<struct player> &Data);
 int main()
 {
 	List<struct player> Data;
+	{
+
+	};
 	fileInput(Data);
 
 	
