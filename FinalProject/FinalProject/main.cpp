@@ -3,24 +3,23 @@
 #include <string>
 #include "BST.hpp"
 #include "LinkedList.h"
+#include "Hash.h"
 
 using namespace std;
 void BinaryTest();
-void fileInput(List<struct player> &Data);
+void fileInput(List<struct player> &Data, Hash hashdata);
 
 int main()
 {
 	List<struct player> Data;
-	{
-
-	};
-	fileInput(Data);
+	Hash hashdata;
+	fileInput(Data, hashdata);
 
 	
 	system("pause");
 }
 
-void fileInput(List<struct player> &Data)
+void fileInput(List<struct player> &Data, Hash hashdata)
 {
 	ifstream infile;
 	int count = 0;
@@ -64,8 +63,10 @@ void fileInput(List<struct player> &Data)
 			infile >> adding.winPercent;
 			getline(infile, taking1);
 			getline(infile, taking1);
+			hashdata.addItem(adding.name, adding.matches, adding.wins, adding.losses, adding.winPercent);
 			count++;
 		}
+		
 		cout << count;
 	}
 }

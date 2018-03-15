@@ -321,7 +321,7 @@ void BST<T>::breadth()
 		return;
 
 	// Create an empty queue for level order tarversal
-	Queue<Node<T> *> q;
+	Queue<BSTNode<T> *> q;
 
 	BSTNode<T> *temp = root;
 	// Enqueue Root and initialize height
