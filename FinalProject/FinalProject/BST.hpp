@@ -4,7 +4,8 @@
 // operations.
 //***********************************************
 
-#include "Node.hpp"
+#include "BSTNode.hpp"
+#include "LLNode.hpp"
 #include "Queue.hpp"
 #include <iostream>
 
@@ -12,19 +13,19 @@ using namespace std;
 
 
 template<class T>
-class BST : protected Node<T>
+class BST : protected BSTNode<T>
 {
 private:
 	int count;
-	Node<T> *root;
+	BSTNode<T> *root;
 
 public:
 	//defautl constructor
 	BST() { root = nullptr; count = 0; }
 
-
+	
 	// getters and setters for root
-	Node<T> *getRoot() { return root; }
+	BSTNode<T> *getRoot() { return root; }
 
 	// returns count of nodes in BST
 	int getCount() { return count; }
@@ -33,8 +34,8 @@ public:
 	bool isEmpty();
 
 	//check if there is left/right child
-	bool Left(Node<T> *check);
-	bool Right(Node<T> *check);
+	bool Left(BSTNode<T> *check);
+	bool Right(BSTNode<T> *check);
 
 	// add new data
 	//void append(Node<T> *nodeptr, Node<T> *newNode);
@@ -49,25 +50,25 @@ public:
 		PostOrder(root, ofs);
 	}
 
-	void PostOrder(Node<T> *nodePtr, ofstream &ofs) const;
+	void PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const;
 
 
 	// for breadth traversal
-	void breadth(ofstream &ofs);
+	void breadth();
 
 	// search for data
 	bool Search(T x);
 
 	// deletion in BST
 	void remove(T val);
-	void deleteNode(T val, Node<T> *nodePtr);
-	void deletion(Node<T> *nodePtr);
+	void deleteNode(T val, BSTNode<T> *nodePtr);
+	void deletion(BSTNode<T> *nodePtr);
 
 	//destructor
 	// deletes BST
 	~BST()
 	{
-		Node<T> *nodePtr;
+		BSTNode<T> *nodePtr;
 		nodePtr = root;
 
 
@@ -77,7 +78,7 @@ public:
 		}
 	}
 
-	void destroyRec(Node<T> *nodeptr)
+	void destroyRec(BSTNode<T> *nodeptr)
 	{
 		if (nodeptr)
 		{
@@ -107,7 +108,7 @@ bool BST<T>::isEmpty()
 }
 
 template<class T>
-bool BST<T>::Left(Node<T> *check)
+bool BST<T>::Left(BSTNode<T> *check)
 {
 	// if there is a left child 
 	// return true
@@ -119,7 +120,7 @@ bool BST<T>::Left(Node<T> *check)
 }
 
 template<class T>
-bool BST<T>::Right(Node<T> *check)
+bool BST<T>::Right(BSTNode<T> *check)
 {
 	// if there is a right child
 	// return true
@@ -128,33 +129,7 @@ bool BST<T>::Right(Node<T> *check)
 	else
 		return false;
 }
-//**************************
-// creates a new node
-// to store into BST
-// and uses the rcursive
-// method append to add a 
-// new node into tree.
-//**************************
-template<class T>
-void BST<T>::addNode(T d)
-{
-	Node<T> *newNode;
 
-	// create new node and store data 
-	newNode = new Node<T>(d);
-
-	if (!root)
-	{
-		root = newNode;
-	}
-	else
-	{
-		// call append to add node in approp. place.
-		append(root, newNode);
-	}
-	// increment count
-	count++;
-}
 
 //********************************************************************
 // add new nodes in appropoates place in accordance of tree structure
@@ -164,12 +139,13 @@ void BST<T>::append(T d)
 {
 	if (!root)
 	{
-		root = new Node<T>(d);
+		root = new BSTNode<T>(d);
+		count++;
 		return;
 	}
 
-	Node<T> *temp = root;
-	Node<T> *parent = nullptr;
+	BSTNode<T> *temp = root;
+	BSTNode<T> *parent = nullptr;
 
 	while (temp)
 	{
@@ -186,7 +162,7 @@ void BST<T>::append(T d)
 
 	if (d < parent->getData())
 	{
-		parent->setLeft(new Node<T>(d));
+		parent->setLeft(new BSTNode<T>(d));
 		count++;
 	}
 	else
@@ -202,7 +178,7 @@ void BST<T>::append(T d)
 // to display a post order traversal
 //*****************************************
 template<class T>
-void BST<T>::PostOrder(Node<T> *nodePtr, ofstream &ofs) const
+void BST<T>::PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const
 {
 
 	if (nodePtr)
@@ -221,7 +197,7 @@ void BST<T>::PostOrder(Node<T> *nodePtr, ofstream &ofs) const
 template<class T>
 bool BST<T>::Search(T x)
 {
-	Node<T> *newNode = root;
+	BSTNode<T> *newNode = root;
 
 	while (nodePtr)
 	{
@@ -259,7 +235,7 @@ void BST<T>::remove(T val)
 // tree appropiately.
 //*****************************************
 template<class T>
-void BST<T>::deleteNode(T val, Node<T> *nodePtr)
+void BST<T>::deleteNode(T val, BSTNode<T> *nodePtr)
 {
 	if (val < nodePtr->getData())
 	{
@@ -281,9 +257,9 @@ void BST<T>::deleteNode(T val, Node<T> *nodePtr)
 // by finding he smallest in the left tree
 //******************************************
 template<class T>
-void BST<T>::deletion(Node<T> *nodePtr)
+void BST<T>::deletion(BSTNode<T> *nodePtr)
 {
-	Node<T> *temp = nullptr;
+	BSTNode<T> *temp = nullptr;
 
 	if (nodePtr == nullptr)
 	{
@@ -336,18 +312,18 @@ void BST<T>::deletion(Node<T> *nodePtr)
 //**********************************************
 
 template<class T>
-void BST<T>::breadth(ofstream &ofs)
+void BST<T>::breadth()
 {
-	ofs << "this is breadth traversal of your data" << endl;
+	//ofs << "this is breadth traversal of your data" << endl;
 
 	// Base Case
 	if (root == nullptr)
 		return;
 
 	// Create an empty queue for level order tarversal
-	Queue<Node<T> *> q;
+	Queue<BSTNode<T> *> q;
 
-	Node<T> *temp = root;
+	BSTNode<T> *temp = root;
 	// Enqueue Root and initialize height
 	q.enqueue(temp);
 
@@ -356,7 +332,7 @@ void BST<T>::breadth(ofstream &ofs)
 		// Print front of queue and remove it from queue
 		temp = q.front();
 		cout << temp->getData() << " ";
-		ofs << temp->getData() << " ";
+		//ofs << temp->getData() << " ";
 		q.dequeue();
 
 		/* Enqueue left child */
