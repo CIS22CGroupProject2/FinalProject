@@ -13,7 +13,7 @@ class Hash
 {
 private:
 
-	static const int tableSize = 69;
+	static const int tableSize = 100;
 
 	struct player
 	{
@@ -30,6 +30,7 @@ public:
 	int numberOfItemsInIndex(int index);
 	void PrintTable();
 	void PrintItemsInIndex(int index);
+	void FindPlayer(string name);
 
 	/*class iterator
 	{

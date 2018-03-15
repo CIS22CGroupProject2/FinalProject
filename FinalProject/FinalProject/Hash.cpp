@@ -26,12 +26,9 @@ int Hash::hash(string key)
 
 	for (int i = 0; i < 2; i++)
 	{
-		hash += (int)key[i];
+		hash = (hash+(int)key[i])*17;
 	}
 	index = hash % tableSize;
-
-
-
 	return index;
 }
 
@@ -125,5 +122,40 @@ void Hash::PrintItemsInIndex(int index)
 			cout << "*********************" << endl;
 			Ptr = Ptr->next;
 		}
+	}
+}
+
+void Hash::FindPlayer(string name)
+{
+	int index = hash(name);
+	bool foundName = false;
+	int matches, wins, losses, winPercent;
+	player* Ptr = hashTable[index];
+	while (Ptr != NULL)
+	{
+		if (Ptr->name == name)
+		{
+			foundName = true;
+			matches = Ptr->matches;
+			wins = Ptr->wins;
+			losses = Ptr->losses;
+			winPercent = Ptr->winPercent;
+			break;
+		}
+		Ptr = Ptr->next;
+	}
+	if (foundName == true)
+	{
+		cout << "*********************" << endl;
+		cout << name << endl;
+		cout << "Number of matches played: " << matches << endl;
+		cout << "Number of wins: " << wins << endl;
+		cout << "Number of losses: " << losses << endl;
+		cout << "Win Percentage: " <<winPercent << "%" << endl;
+		cout << "*********************" << endl;
+	}
+	else
+	{
+		cout << name << "'s info was not found in the hash table" << endl;
 	}
 }
