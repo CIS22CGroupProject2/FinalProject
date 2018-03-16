@@ -9,13 +9,71 @@ using namespace std;
 void BinaryTest();
 void fileInput(List<struct player> &Data, Hash hashdata);
 
+//add, delete and modify entries in BST and Hashtable
+string playername;         //input variables for user
+int m, w, l, winp;         //matches, wins, losses, win%
+
+void addEntry(BST<T> BStree, Hash hashdata){
+	cout << "Enter a new player to add" << endl;
+	cin >> playername;
+
+	cout << "Enter number of matches, wins , losses, and winning percentage" << endl;
+	cin >> m >> w >> l >> winp;
+	if(cin.fail()){
+		cin.clear();
+	}
+	//from Struct Player in LInkedListNode.h
+	player p
+	p->name = playername;
+  p->matches = m;
+	p->wins = w;
+	p->losses = l;
+	p->winPercent = winp;
+
+	//add entry to BST
+	BStree.append(p);
+
+	//add entry to hashtable and print all entries
+	hashdata.addItem(playername, m, w, l, winp);
+	hashdata.PrintTable();
+
+}
+
+
+//delete entry from BST and hashtable
+void deleteEntry(BST<T> BStree, Hash hashdata){
+	string pname;
+	 cout << "Enter a player name to delete from the list" << endl;
+	 cin >> pname;
+
+	bool playerfound = hashdata.FindPlayer(pname);
+	if(playerfound){
+	//delete player entry from hashtable
+	}
+  //if player entry is in the BST, remove the entry
+	if(BStree.Search(pname)){
+		BStree.remove(pname);
+	}
+	else{
+		cout << pname << "was not found in the BST" << endl;
+	}
+
+}
+
+
+void modifyEntry(BST<T> BStree, Hash hashdata);
+
+
+
+
+
 int main()
 {
 	List<struct player> Data;
 	Hash hashdata;
 	fileInput(Data, hashdata);
 
-	
+
 	system("pause");
 }
 
@@ -66,7 +124,7 @@ void fileInput(List<struct player> &Data, Hash hashdata)
 			hashdata.addItem(adding.name, adding.matches, adding.wins, adding.losses, adding.winPercent);
 			count++;
 		}
-		
+
 		cout << count;
 	}
 }
