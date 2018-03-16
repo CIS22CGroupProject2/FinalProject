@@ -61,7 +61,88 @@ void deleteEntry(BST<T> BStree, Hash hashdata){
 }
 
 
-void modifyEntry(BST<T> BStree, Hash hashdata);
+void modifyEntry(BST<T> BStree, Hash hashdata){
+			int wp, won, lost, newmatch;
+			string nname; //newname
+	    string player;
+			cout << "Enter a player entry to modify" << endl;
+			cin >> player;
+
+			int choice;
+			bool loopchoice = true;
+
+			if(hashdata.FindPlayer(player)){
+				int index = hash(player)      //function from BST.hpp to find the index in hashtable of the player name entry from user
+				while(loopchoice){
+					cout << "Choose the player stat that you would like to change" << endl;
+					  << "1.Name" << endl;
+						<< "2.Matches" << endl;
+						<< "3.Wins" << endl;
+						<< "4.Losses" << endl;
+						<< "5.Winning Percentage" << endl;
+
+						cin >> choice;
+						if(cin.fail()){
+							cin.clear();
+							choice = 0;
+						}
+						if (choice < 1 || choice > 4) {
+				      cout << "Your selection is not valid. Please try again." << endl;
+		      	}
+						else{
+							if(choice == 1) {
+								 cout << "Enter the new name for the player" << endl;
+								 cin >> nname;
+
+							 	hashTable[index]->name = nname;
+
+							}
+							else if(choice == 2){
+								cout << "Enter the new value for total matches" << endl;
+								cin >> newmatch;
+
+							 hashTable[index]->matches = newmatch;
+
+							}
+
+							else if(choice == 3){
+								cout << "Enter the new value for the total wins" << endl;
+								cin >> won;
+
+							 hashTable[index]->wins = won;
+
+							}
+							else if(choice == 4){
+								cout << "Enter the new value for total losses" << endl;
+								cin >> lost;
+
+							 hashTable[index]->losses = lost;
+
+							}
+
+							else if(choice == 5){
+								cout << "Enter the new value for player's winning percentage" << endl;
+								cin >> wp;
+
+							 hashTable[index]->winPercent = wp;
+
+							}
+
+
+
+						}
+
+				}
+
+
+
+
+
+			}
+			else{
+				cout << "Player not found in hash table" << endl;
+			}
+}
 
 
 
