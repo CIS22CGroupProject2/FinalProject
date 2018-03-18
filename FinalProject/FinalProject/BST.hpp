@@ -8,6 +8,7 @@
 #include "LLNode.hpp"
 #include "Queue.hpp"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -39,9 +40,8 @@ public:
 
 	// add new data
 	//void append(Node<T> *nodeptr, Node<T> *newNode);
-	void append(T d);
-	// to create a new node
-	void addNode(T d);
+	void append(string n, int m, int w, int l, int wp);
+	
 
 	// display a post order traversal of BST
 	//void displayPostOrder(Node<T> *nodePtr) const
@@ -57,11 +57,11 @@ public:
 	void breadth();
 
 	// search for data
-	bool Search(T x);
+	bool SearchByName(string n);
 
 	// deletion in BST
-	void remove(T val);
-	void deleteNode(T val, BSTNode<T> *nodePtr);
+	void remove(string n);
+	void deleteNode(string n, BSTNode<T> *nodePtr);
 	void deletion(BSTNode<T> *nodePtr);
 
 	//destructor
@@ -135,11 +135,11 @@ bool BST<T>::Right(BSTNode<T> *check)
 // add new nodes in appropoates place in accordance of tree structure
 //********************************************************************
 template<class T>
-void BST<T>::append(T d)
+void BST<T>::append(string n, int m, int w, int l, int wp)
 {
 	if (!root)
 	{
-		root = new BSTNode<T>(d);
+		root = new BSTNode<T>(n, m, w, l, wp);
 		count++;
 		return;
 	}
@@ -150,7 +150,7 @@ void BST<T>::append(T d)
 	while (temp)
 	{
 		parent = temp;
-		if (d < temp->getData())
+		if (n < temp->getName())
 		{
 			temp = temp->getLeft();
 		}
@@ -160,14 +160,14 @@ void BST<T>::append(T d)
 		}
 	}
 
-	if (d < parent->getData())
+	if (n < parent->getName())
 	{
-		parent->setLeft(new BSTNode<T>(d));
+		parent->setLeft(new BSTNode<T>(string n, int m, int w,int l, int wp));
 		count++;
 	}
 	else
 	{
-		parent->setRight(new Node<T>(d));
+		parent->setRight(new Node<T>(string n, int m, int w, int l, int wp));
 		count++;
 	}
 
@@ -185,8 +185,20 @@ void BST<T>::PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const
 	{
 		PostOrder(nodePtr->getLeft(), ofs);
 		PostOrder(nodePtr->getRight(), ofs);
-		cout << nodePtr->getData() << endl;
-		ofs << nodePtr->getData() << endl;
+
+		// write to commad scrn
+		cout << nodePtr->getName() << endl;
+		cout << nodePtr->getMatches() << andl;
+		cout << nodePtr->getWins() << endl;
+		cout << nodePtr->getLosses() << endl;
+		cout << nodePtr->getWinPercent() << endl;
+
+		// write to output files
+		ofs << nodePtr->getName() << endl;
+		ofs << nodePtr->getMatches() << andl;
+		ofs << nodePtr->getWins() << endl;
+		ofs << nodePtr->getLosses() << endl;
+		ofs << nodePtr->getWinPercent() << endl;
 	}
 }
 //*****************************************
@@ -195,19 +207,19 @@ void BST<T>::PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const
 //*****************************************
 
 template<class T>
-bool BST<T>::Search(T x)
+bool BST<T>::SearchByName(string n)
 {
 	BSTNode<T> *newNode = root;
 
 	while (nodePtr)
 	{
-		if (nodePtr->getData() == x)
+		if (nodePtr->getName() == n)
 		{
 			return true;
 		}
 		else
 		{
-			if (x < nodePtr->getData())
+			if (n < nodePtr->getName())
 			{
 				nodePtr->getLeft();
 			}
@@ -224,9 +236,9 @@ bool BST<T>::Search(T x)
 // by calling deleting node.
 //*****************************************
 template<class T>
-void BST<T>::remove(T val)
+void BST<T>::remove(string n)
 {
-	deleteNode(val, root);
+	deleteNode(n, root);
 }
 //**********************************************
 // find the node in the binary tree
@@ -235,16 +247,16 @@ void BST<T>::remove(T val)
 // tree appropiately.
 //*****************************************
 template<class T>
-void BST<T>::deleteNode(T val, BSTNode<T> *nodePtr)
+void BST<T>::deleteNode(string n, BSTNode<T> *nodePtr)
 {
-	if (val < nodePtr->getData())
+	if (n < nodePtr->getName())
 	{
-		deleteNode(val, nodePtr->getLeft());
+		deleteNode(n, nodePtr->getLeft());
 
 	}
-	else if (val > nodePtr->getData())
+	else if (n > nodePtr->getName())
 	{
-		deleteNode(val, nodePtr->getRight());
+		deleteNode(n, nodePtr->getRight());
 	}
 	else
 	{

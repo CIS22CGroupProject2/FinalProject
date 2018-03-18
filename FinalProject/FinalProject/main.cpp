@@ -25,7 +25,7 @@ void addEntry(BST<T> BStree, Hash hashdata){
 		cin.clear();
 	}
 	//from Struct Player in LInkedListNode.h
-	player p
+	player p;
 	p->name = playername;
   p->matches = m;
 	p->wins = w;
@@ -150,22 +150,4 @@ void findPlayerFromHash(Hash hashdata)
 }
 
 
-void BinaryTest()
-{
-	BST<int> tree;
 
-	tree.addNode(3);
-	tree.addNode(1);
-	tree.addNode(6);
-	tree.addNode(4);
-
-	if (tree.isEmpty())
-	{
-		cout << "Is empty";
-	}
-	else
-		cout << "not empty";
-
-	tree.breadth();
-
-}
