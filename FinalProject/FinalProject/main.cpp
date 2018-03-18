@@ -6,8 +6,10 @@
 #include "Hash.h"
 
 using namespace std;
-void BinaryTest();
+//void BinaryTest();
 void fileInput(List<struct player> &Data, Hash hashdata);
+void deletePlayerFromHash(Hash);
+void findPlayerFromHash(Hash);
 
 //add, delete and modify entries in BST and Hashtable
 string playername;         //input variables for user
@@ -66,14 +68,14 @@ void modifyEntry(BST<T> BStree, Hash hashdata);
 
 
 
-
 int main()
 {
 	List<struct player> Data;
 	Hash hashdata;
 	fileInput(Data, hashdata);
 
-
+	findPlayerFromHash(hashdata);
+	
 	system("pause");
 }
 
@@ -127,6 +129,24 @@ void fileInput(List<struct player> &Data, Hash hashdata)
 
 		cout << count;
 	}
+}
+
+void deletePlayerFromHash(Hash hashdata)
+{
+	string name;
+	hashdata.PrintTable();
+	cout << "remove a player: ";
+	cin >> name;
+	hashdata.removePlayer(name);
+	hashdata.PrintTable();
+}
+void findPlayerFromHash(Hash hashdata)
+{
+	string name;
+	hashdata.printEachName();
+	cout << "search for a player: ";
+	cin >> name;
+	hashdata.FindPlayer(name);
 }
 
 

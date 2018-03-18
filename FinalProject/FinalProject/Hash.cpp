@@ -24,7 +24,7 @@ int Hash::hash(string key)
 	int hash = 0;
 	int index;
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		hash = (hash+(int)key[i])*17;
 	}
@@ -157,5 +157,84 @@ void Hash::FindPlayer(string name)
 	else
 	{
 		cout << name << "'s info was not found in the hash table" << endl;
+	}
+}
+
+void Hash::removePlayer(string name)
+{
+	int index = hash(name);
+	
+	player* delPtr;
+	player* P1;
+	player* P2;
+
+	if (hashTable[index]->name == "empty")
+	{
+		cout << name << " was not found in the Hash table" << endl;
+	}
+	else if (hashTable[index]->name == name && hashTable[index]->next == NULL)
+	{
+		hashTable[index]->name = "empty";
+		hashTable[index]->losses = 0;
+		hashTable[index]->matches = 0;
+		hashTable[index]->winPercent = 0;
+		hashTable[index]->wins = 0;
+		cout << name << " was removed from Hash Table" << endl;
+	}
+	else if (hashTable[index]->name == name)
+	{
+		delPtr = hashTable[index];
+		hashTable[index] = hashTable[index]->next;
+		delete delPtr;
+		cout << name << " was removed from Hash Table" << endl;
+	}
+	else
+	{
+		P1 = hashTable[index]->next;
+		P2 = hashTable[index];
+		while (P1 != NULL && P1->name != name)
+		{
+			P2 = P1;
+			P1 = P1->next;
+		}
+		if (P1 == NULL)
+		{
+			cout << name << " was not found in the Hash table" << endl;
+		}
+		else
+		{
+			delPtr = P1;
+			P1 = P1->next;
+			P2->next = P1;
+
+			delete delPtr;
+			cout << name << " was removed from Hash Table" << endl;
+		}
+	}
+}
+
+void Hash::printEachName()
+{
+	int index = 0;
+	int i = 0;
+	player* Ptr;
+	while (index < tableSize)
+	{
+		Ptr = hashTable[index];
+		if (Ptr->name == "empty")
+		{
+			index++;
+			continue;
+		}
+		else
+		{
+			while (Ptr != NULL)
+			{
+				cout << i << ") " <<Ptr->name << endl;
+				i++;
+				Ptr = Ptr->next;
+			}
+		}
+		index++;
 	}
 }
