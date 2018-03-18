@@ -181,6 +181,7 @@ void Hash::removePlayer(string name)
 		hashTable[index]->wins = 0;
 		cout << name << " was removed from Hash Table" << endl;
 	}
+	
 	else if (hashTable[index]->name == name)
 	{
 		delPtr = hashTable[index];
@@ -211,6 +212,8 @@ void Hash::removePlayer(string name)
 			cout << name << " was removed from Hash Table" << endl;
 		}
 	}
+	
+
 }
 
 void Hash::printEachName()

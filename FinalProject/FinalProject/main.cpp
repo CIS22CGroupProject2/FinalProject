@@ -14,7 +14,7 @@ void findPlayerFromHash(Hash);
 //add, delete and modify entries in BST and Hashtable
 string playername;         //input variables for user
 int m, w, l, winp;         //matches, wins, losses, win%
-
+/*
 void addEntry(BST<T> BStree, Hash hashdata){
 	cout << "Enter a new player to add" << endl;
 	cin >> playername;
@@ -65,7 +65,7 @@ void deleteEntry(BST<T> BStree, Hash hashdata){
 
 void modifyEntry(BST<T> BStree, Hash hashdata);
 
-
+*/
 
 
 int main()
@@ -73,7 +73,7 @@ int main()
 	List<struct player> Data;
 	Hash hashdata;
 	fileInput(Data, hashdata);
-
+	//deletePlayerFromHash(hashdata);
 	findPlayerFromHash(hashdata);
 	
 	system("pause");
@@ -127,7 +127,7 @@ void fileInput(List<struct player> &Data, Hash hashdata)
 			count++;
 		}
 
-		cout << count;
+		cout << count << endl;
 	}
 }
 
