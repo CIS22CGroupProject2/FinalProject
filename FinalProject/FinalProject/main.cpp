@@ -6,7 +6,7 @@
 #include "Hash.h"
 
 using namespace std;
-void BinaryTest();
+//void BinaryTest();
 void fileInput(List<struct player> &Data, Hash hashdata);
 
 //add, delete and modify entries in BST and Hashtable
@@ -23,7 +23,7 @@ void addEntry(BST<T> BStree, Hash hashdata){
 		cin.clear();
 	}
 	//from Struct Player in LInkedListNode.h
-	player p
+	player p;
 	p->name = playername;
   p->matches = m;
 	p->wins = w;
@@ -130,22 +130,4 @@ void fileInput(List<struct player> &Data, Hash hashdata)
 }
 
 
-void BinaryTest()
-{
-	BST<int> tree;
 
-	tree.addNode(3);
-	tree.addNode(1);
-	tree.addNode(6);
-	tree.addNode(4);
-
-	if (tree.isEmpty())
-	{
-		cout << "Is empty";
-	}
-	else
-		cout << "not empty";
-
-	tree.breadth();
-
-}
