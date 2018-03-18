@@ -7,9 +7,9 @@
 
 using namespace std;
 //void BinaryTest();
-void fileInput(List<struct player> &Data, Hash hashdata);
-void deletePlayerFromHash(Hash);
-void findPlayerFromHash(Hash);
+void fileInput(List<struct player> &Data, Hash &hashdata);
+void deletePlayerFromHash(Hash&);
+void findPlayerFromHash(Hash&);
 
 //add, delete and modify entries in BST and Hashtable
 string playername;         //input variables for user
@@ -79,7 +79,7 @@ int main()
 	system("pause");
 }
 
-void fileInput(List<struct player> &Data, Hash hashdata)
+void fileInput(List<struct player> &Data, Hash &hashdata)
 {
 	ifstream infile;
 	int count = 0;
@@ -131,7 +131,7 @@ void fileInput(List<struct player> &Data, Hash hashdata)
 	}
 }
 
-void deletePlayerFromHash(Hash hashdata)
+void deletePlayerFromHash(Hash &hashdata)
 {
 	string name;
 	hashdata.PrintTable();
@@ -140,7 +140,7 @@ void deletePlayerFromHash(Hash hashdata)
 	hashdata.removePlayer(name);
 	hashdata.PrintTable();
 }
-void findPlayerFromHash(Hash hashdata)
+void findPlayerFromHash(Hash &hashdata)
 {
 	string name;
 	hashdata.printEachName();

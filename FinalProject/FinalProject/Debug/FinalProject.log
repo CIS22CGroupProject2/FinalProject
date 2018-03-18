@@ -1,35 +1,4 @@
-﻿  main.cpp
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(16): error C2065: 'T': undeclared identifier
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(16): error C2923: 'BST': 'T' is not a valid template type argument for parameter 'T'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(27): error C2819: type 'player' does not have an overloaded member 'operator ->'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\linkedlistnode.h(46): note: see declaration of 'player'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(27): note: did you intend to use '.' instead?
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(27): error C2232: '->player::name': left operand has 'struct' type, use '.'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(28): error C2819: type 'player' does not have an overloaded member 'operator ->'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\linkedlistnode.h(46): note: see declaration of 'player'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(28): note: did you intend to use '.' instead?
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(28): error C2232: '->player::matches': left operand has 'struct' type, use '.'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(29): error C2819: type 'player' does not have an overloaded member 'operator ->'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\linkedlistnode.h(46): note: see declaration of 'player'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(29): note: did you intend to use '.' instead?
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(29): error C2232: '->player::wins': left operand has 'struct' type, use '.'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(30): error C2819: type 'player' does not have an overloaded member 'operator ->'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\linkedlistnode.h(46): note: see declaration of 'player'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(30): note: did you intend to use '.' instead?
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(30): error C2232: '->player::losses': left operand has 'struct' type, use '.'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(31): error C2819: type 'player' does not have an overloaded member 'operator ->'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\linkedlistnode.h(46): note: see declaration of 'player'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(31): note: did you intend to use '.' instead?
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(31): error C2232: '->player::winPercent': left operand has 'struct' type, use '.'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(34): error C2660: 'BST<T>::append': function does not take 1 arguments
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(44): error C2065: 'T': undeclared identifier
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(44): error C2923: 'BST': 'T' is not a valid template type argument for parameter 'T'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(49): error C2440: 'initializing': cannot convert from 'void' to 'bool'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(49): note: Expressions of type void cannot be converted to other types
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(54): error C2039: 'Search': is not a member of 'BST'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\bst.hpp(17): note: see declaration of 'BST'
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(55): error C2662: 'void BST<T>::remove(std::string)': cannot convert 'this' pointer from 'BST' to 'BST<T> &'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(55): note: Reason: cannot convert from 'BST' to 'BST<T>'
-  c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(55): note: Conversion requires a second user-defined-conversion operator or constructor
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(64): error C2065: 'T': undeclared identifier
-c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(64): error C2923: 'BST': 'T' is not a valid template type argument for parameter 'T'
+﻿  Hash.cpp
+  main.cpp
+  Generating Code...
+  FinalProject.vcxproj -> C:\Users\Peter Kirov\Documents\GitHub\FinalProject\FinalProject\Debug\FinalProject.exe

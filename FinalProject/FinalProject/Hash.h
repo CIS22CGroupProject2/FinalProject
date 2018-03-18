@@ -34,7 +34,7 @@ public:
 	void removePlayer(string name);
 	void printEachName();
 
-	/*
+	
 	~Hash()
 	{
 		player* Ptr;
@@ -48,7 +48,7 @@ public:
 			}
 		}
 	}
-	*/
+	
 
 
 	/*class iterator
