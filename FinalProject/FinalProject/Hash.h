@@ -33,7 +33,7 @@ public:
 	void FindPlayer(string name);
 	void removePlayer(string name);
 	void printEachName();
-
+	player* returnPlayerPointer(string name);
 	
 	~Hash()
 	{
