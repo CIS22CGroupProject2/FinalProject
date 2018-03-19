@@ -1,4 +1,6 @@
 #pragma once
+#ifndef BST_h
+#define BST_h
 //***********************************************
 // this class is BST w/ the standard
 // operations.
@@ -356,3 +358,4 @@ void BST<T>::breadth()
 			q.enqueue(temp->getRight());
 	}
 }
+#endif

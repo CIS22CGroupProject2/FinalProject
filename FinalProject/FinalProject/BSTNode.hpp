@@ -1,4 +1,6 @@
 #pragma once
+#ifndef BSTNODE_H
+#define BSTNODE_H
 //**************************
 // Node for BST 
 //**************************
@@ -60,3 +62,4 @@ public:
 	//destructor
 	virtual ~BSTNode() {}
 };
+#endif

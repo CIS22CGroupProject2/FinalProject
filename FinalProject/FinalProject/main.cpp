@@ -72,9 +72,9 @@ int main()
 {
 	List<struct player> Data;
 	Hash hashdata;
+	BST bstdata;
 	fileInput(Data, hashdata);
-	deletePlayerFromHash(hashdata);
-	findPlayerFromHash(hashdata);
+	
 	
 	system("pause");
 }
