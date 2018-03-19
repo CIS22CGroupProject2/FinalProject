@@ -10,11 +10,14 @@ using namespace std;
 void fileInput(List<struct player> &Data, Hash &hashdata);
 void deletePlayerFromHash(Hash&);
 void findPlayerFromHash(Hash&);
+void testBST(BST&);
 
+
+/*
 //add, delete and modify entries in BST and Hashtable
 string playername;         //input variables for user
 int m, w, l, winp;         //matches, wins, losses, win%
-/*
+
 void addEntry(BST<T> BStree, Hash hashdata){
 	cout << "Enter a new player to add" << endl;
 	cin >> playername;
@@ -70,11 +73,12 @@ void modifyEntry(BST<T> BStree, Hash hashdata);
 
 int main()
 {
+
+
 	List<struct player> Data;
 	Hash hashdata;
 	BST bstdata;
 	fileInput(Data, hashdata);
-	
 	
 	system("pause");
 }
@@ -150,4 +154,11 @@ void findPlayerFromHash(Hash &hashdata)
 }
 
 
+void testBST(BST &tree1)
+{
 
+
+	tree1.breadth();
+
+
+}
