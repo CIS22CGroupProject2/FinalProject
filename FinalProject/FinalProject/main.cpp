@@ -6,13 +6,15 @@
 #include "Hash.h"
 
 using namespace std;
-void BinaryTest();
-void fileInput(List<struct player> &Data, Hash hashdata);
+//void BinaryTest();
+void fileInput(List<struct player> &Data, Hash &hashdata);
+void deletePlayerFromHash(Hash&);
+void findPlayerFromHash(Hash&);
 
 //add, delete and modify entries in BST and Hashtable
 string playername;         //input variables for user
 int m, w, l, winp;         //matches, wins, losses, win%
-
+/*
 void addEntry(BST<T> BStree, Hash hashdata){
 	cout << "Enter a new player to add" << endl;
 	cin >> playername;
@@ -23,7 +25,7 @@ void addEntry(BST<T> BStree, Hash hashdata){
 		cin.clear();
 	}
 	//from Struct Player in LInkedListNode.h
-	player p
+	player p;
 	p->name = playername;
   p->matches = m;
 	p->wins = w;
@@ -144,8 +146,7 @@ void modifyEntry(BST<T> BStree, Hash hashdata){
 			}
 }
 
-
-
+*/
 
 
 int main()
@@ -153,12 +154,13 @@ int main()
 	List<struct player> Data;
 	Hash hashdata;
 	fileInput(Data, hashdata);
-
-
+	deletePlayerFromHash(hashdata);
+	findPlayerFromHash(hashdata);
+	
 	system("pause");
 }
 
-void fileInput(List<struct player> &Data, Hash hashdata)
+void fileInput(List<struct player> &Data, Hash &hashdata)
 {
 	ifstream infile;
 	int count = 0;
@@ -206,27 +208,27 @@ void fileInput(List<struct player> &Data, Hash hashdata)
 			count++;
 		}
 
-		cout << count;
+		cout << count << endl;
 	}
 }
 
-
-void BinaryTest()
+void deletePlayerFromHash(Hash &hashdata)
 {
-	BST<int> tree;
-
-	tree.addNode(3);
-	tree.addNode(1);
-	tree.addNode(6);
-	tree.addNode(4);
-
-	if (tree.isEmpty())
-	{
-		cout << "Is empty";
-	}
-	else
-		cout << "not empty";
-
-	tree.breadth();
-
+	string name;
+	hashdata.PrintTable();
+	cout << "remove a player: ";
+	cin >> name;
+	hashdata.removePlayer(name);
+	hashdata.PrintTable();
 }
+void findPlayerFromHash(Hash &hashdata)
+{
+	string name;
+	hashdata.printEachName();
+	cout << "search for a player: ";
+	cin >> name;
+	hashdata.FindPlayer(name);
+}
+
+
+

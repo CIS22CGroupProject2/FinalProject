@@ -1,3 +1,2 @@
 ﻿  main.cpp
-main.obj : error LNK2019: unresolved external symbol "public: void __thiscall BST<int>::addNode(int)" (?addNode@?$BST@H@@QAEXH@Z) referenced in function "void __cdecl BinaryTest(void)" (?BinaryTest@@YAXXZ)
-C:\Users\asvle\source\repos\FinalProject\FinalProject\Debug\FinalProject.exe : fatal error LNK1120: 1 unresolved externals
+  FinalProject.vcxproj -> C:\Users\Peter Kirov\Documents\GitHub\FinalProject\FinalProject\Debug\FinalProject.exe

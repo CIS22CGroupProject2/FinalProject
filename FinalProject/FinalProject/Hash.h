@@ -13,7 +13,7 @@ class Hash
 {
 private:
 
-	static const int tableSize = 100;
+	static const int tableSize = 70;
 
 	struct player
 	{
@@ -31,6 +31,25 @@ public:
 	void PrintTable();
 	void PrintItemsInIndex(int index);
 	void FindPlayer(string name);
+	void removePlayer(string name);
+	void printEachName();
+
+	
+	~Hash()
+	{
+		player* Ptr;
+		for (int i = 0; i<tableSize; i++)
+		{
+			while (hashTable[i] != NULL)
+			{
+				Ptr = hashTable[i];
+				hashTable[i] = hashTable[i]->next;
+				delete Ptr;
+			}
+		}
+	}
+	
+
 
 	/*class iterator
 	{
