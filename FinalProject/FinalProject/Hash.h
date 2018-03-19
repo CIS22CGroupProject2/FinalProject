@@ -14,14 +14,12 @@ class Hash
 private:
 
 	static const int tableSize = 70;
-
 	struct player
 	{
 		string name;
 		int matches, wins, losses, winPercent;
 		player* next;
 	};
-
 	player* hashTable[tableSize];
 public:
 	Hash();

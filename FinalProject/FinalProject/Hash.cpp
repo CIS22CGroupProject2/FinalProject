@@ -160,7 +160,7 @@ void Hash::FindPlayer(string name)
 	}
 }
 
-player* Hash::returnPlayerPointer(string name)
+Hash::player* Hash::returnPlayerPointer(string name)
 {
 	int index = hash(name);
 	bool foundName = false;
