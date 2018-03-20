@@ -8,9 +8,11 @@
 using namespace std;
 //void BinaryTest();
 void fileInput(List<struct player> &Data, Hash &hashdata);
+void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins);
 void deletePlayerFromHash(Hash&);
 void findPlayerFromHash(Hash&);
 void testBST(BST&);
+bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins);
 
 
 /*
@@ -158,9 +160,15 @@ int main()
 
 	List<struct player> Data;
 	Hash hashdata;
-	BST bstdata;
+	BST bstbyname;
+	BST bstbywins;
+	bool inloop = true;
 	fileInput(Data, hashdata);
-	
+	toBST(hashdata, bstbyname, bstbywins);
+	while (inloop == true)
+	{
+		inloop = menu(hashdata, bstbyname, bstbywins);
+	}
 	system("pause");
 }
 
@@ -214,6 +222,16 @@ void fileInput(List<struct player> &Data, Hash &hashdata)
 
 		cout << count << endl;
 	}
+}
+void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins)
+{
+
+}
+bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins)
+{
+	bool inloop = true;
+	cout << "Choose from one of the following:" << endl;
+	return inloop;
 }
 
 void deletePlayerFromHash(Hash &hashdata)
