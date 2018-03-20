@@ -13,11 +13,18 @@ struct player
 	player* next;
 };
 //void BinaryTest();
+
+//File Input/Output
 void fileInput(List<struct player> &Data, Hash &hashdata);
+void fileExport(List<struct player> &Data);
+//Data transfer
 void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins);
+//Modifying Functions
 void deletePlayerFromHash(Hash&);
 void findPlayerFromHash(Hash&);
+//Test Function
 void testBST(BST&);
+//Selection UI
 bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data);
 
 std::ostream& operator<< (std::ostream &foo, player value)
@@ -42,6 +49,7 @@ int main()
 	{
 		inloop = menu(hashdata, bstbyname, bstbywins, Data);
 	}
+	fileExport(Data);
 	
 	system("pause");
 }
@@ -98,6 +106,17 @@ void fileInput(List<player> &Data, Hash &hashdata)
 		cout << count << endl;
 	}
 }
+void fileExport(List<struct player> &Data)
+{
+	ofstream outfile;
+
+	outfile.open("players.txt");
+	if (!outfile)
+	{
+		cerr << "Open Failed";
+		exit(3);
+	}
+}
 void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins)
 {
 
@@ -119,9 +138,11 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	cin >> choice;
 	if (choice < 1 || choice > 9)
 	{
-		cout << endl << endl << "*************************************************************" << endl
+		cout << endl << endl 
+			<< "*************************************************************" << endl
 			<< "One of the menu items was not chosen. Please try again." << endl
-			<< "*************************************************************" << endl << endl;
+			<< "*************************************************************" << endl 
+			<< endl;
 	}
 	else
 	{
@@ -159,7 +180,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 		}
 		if (choice == 9)
 		{
-
+			inloop = false;
 		}
 	}
 	return inloop;
