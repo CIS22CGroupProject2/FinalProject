@@ -160,6 +160,23 @@ void Hash::FindPlayer(string name)
 	}
 }
 
+Hash::player* Hash::returnPlayerPointer(string name)
+{
+	int index = hash(name);
+	bool foundName = false;
+	player* Ptr = hashTable[index];
+	while (Ptr != NULL)
+	{
+		if (Ptr->name == name)
+		{
+			foundName = true;
+			break;
+		}
+		Ptr = Ptr->next;
+	}
+	return Ptr;
+}
+
 void Hash::removePlayer(string name)
 {
 	int index = hash(name);

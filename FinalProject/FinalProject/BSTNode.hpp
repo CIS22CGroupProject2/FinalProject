@@ -9,15 +9,14 @@
 #include<iostream>
 using namespace std;
 
-template<class T> 
 class BSTNode
 {
 private:
 	// data in node for BST
 	string name;
 	int matches, wins, losses, winPercent;
-	BSTNode<T> *left;
-	BSTNode<T> *right;
+	BSTNode *left;
+	BSTNode *right;
 
 public:
 	//default constructor
@@ -51,12 +50,12 @@ public:
 
 
 	//get and setters for left child
-	void setLeft(BSTNode<T> *l) { left = l; }
-	BSTNode<T> *getLeft() { return left; }
+	void setLeft(BSTNode *l) { left = l; }
+	BSTNode *getLeft() { return left; }
 
 	//getters and setters for right child
-	void setRight(BSTNode<T> *r) { right = r; }
-	BSTNode<T> *getRight() { return right; }
+	void setRight(BSTNode *r) { right = r; }
+	BSTNode *getRight() { return right; }
 
 
 	//destructor

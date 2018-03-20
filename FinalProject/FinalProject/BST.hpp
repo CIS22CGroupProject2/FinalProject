@@ -1,6 +1,6 @@
 #pragma once
-#ifndef BST_h
-#define BST_h
+#ifndef BST_hpp
+#define BST_hpp
 //***********************************************
 // this class is BST w/ the standard
 // operations.
@@ -15,12 +15,11 @@
 using namespace std;
 
 
-template<class T>
-class BST : protected BSTNode<T>
+class BST : protected BSTNode
 {
 private:
 	int count;
-	BSTNode<T> *root;
+	BSTNode *root;
 
 public:
 	//defautl constructor
@@ -28,7 +27,7 @@ public:
 
 	
 	// getters and setters for root
-	BSTNode<T> *getRoot() { return root; }
+	BSTNode *getRoot() { return root; }
 
 	// returns count of nodes in BST
 	int getCount() { return count; }
@@ -36,26 +35,22 @@ public:
 	// check if BST is empty
 	bool isEmpty();
 
-	//check if there is left/right child
-	bool Left(BSTNode<T> *check);
-	bool Right(BSTNode<T> *check);
+	// add new data to BST
+	void appendByName(string n, int m, int w, int l, int wp);
+	void appendByWins(string n, int m, int w, int l, int wp);
 
-	// add new data
-	//void append(Node<T> *nodeptr, Node<T> *newNode);
-	void append(string n, int m, int w, int l, int wp);
 	
 
 	// display a post order traversal of BST
-	//void displayPostOrder(Node<T> *nodePtr) const
 	void displayPostOrder(ofstream &ofs) const
 	{
 		PostOrder(root, ofs);
 	}
 
-	void PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const;
+	void PostOrder(BSTNode *nodePtr, ofstream &ofs) const;
 
 
-	// for breadth traversal
+	// for breadth traversals
 	void breadth();
 
 	// search for data
@@ -63,14 +58,14 @@ public:
 
 	// deletion in BST
 	void remove(string n);
-	void deleteNode(string n, BSTNode<T> *nodePtr);
-	void deletion(BSTNode<T> *nodePtr);
+	void deleteNode(string n, BSTNode *nodePtr);
+	void deletion(BSTNode *nodePtr);
 
 	//destructor
 	// deletes BST
 	~BST()
 	{
-		BSTNode<T> *nodePtr;
+		BSTNode *nodePtr;
 		nodePtr = root;
 
 
@@ -80,7 +75,7 @@ public:
 		}
 	}
 
-	void destroyRec(BSTNode<T> *nodeptr)
+	void destroyRec(BSTNode *nodeptr)
 	{
 		if (nodeptr)
 		{
@@ -93,10 +88,10 @@ public:
 	}
 };
 
-
-
-template<class T>
-bool BST<T>::isEmpty()
+//*****************************************************
+// this function checks if the entire BST is empty
+//*****************************************************
+bool BST::isEmpty()
 {
 	// if root is pnting to nullptr
 	// return true
@@ -109,45 +104,22 @@ bool BST<T>::isEmpty()
 		return false;
 }
 
-template<class T>
-bool BST<T>::Left(BSTNode<T> *check)
-{
-	// if there is a left child 
-	// return true
-	if (!check->getLeft())
-		return true;
-	else
-		return false;
-
-}
-
-template<class T>
-bool BST<T>::Right(BSTNode<T> *check)
-{
-	// if there is a right child
-	// return true
-	if (!check->getRight())
-		return true;
-	else
-		return false;
-}
-
 
 //********************************************************************
 // add new nodes in appropoates place in accordance of tree structure
+// according to ascii values of names
 //********************************************************************
-template<class T>
-void BST<T>::append(string n, int m, int w, int l, int wp)
+void BST::appendByName(string n, int m, int w, int l, int wp)
 {
 	if (!root)
 	{
-		root = new BSTNode<T>(n, m, w, l, wp);
+		root = new BSTNode(n, m, w, l, wp);
 		count++;
 		return;
 	}
 
-	BSTNode<T> *temp = root;
-	BSTNode<T> *parent = nullptr;
+	BSTNode *temp = root;
+	BSTNode *parent = nullptr;
 
 	while (temp)
 	{
@@ -164,12 +136,55 @@ void BST<T>::append(string n, int m, int w, int l, int wp)
 
 	if (n < parent->getName())
 	{
-		parent->setLeft(new BSTNode<T>(string n, int m, int w,int l, int wp));
+		parent->setLeft(new BSTNode( n,  m,  w, l,  wp));
 		count++;
 	}
 	else
 	{
-		parent->setRight(new Node<T>(string n, int m, int w, int l, int wp));
+		parent->setRight(new BSTNode( n,  m,  w,  l,  wp));
+		count++;
+	}
+
+}
+
+
+//********************************************************************
+// add new nodes in appropoates place in accordance of tree structure
+// according to value of wins
+//********************************************************************
+void BST::appendByWins(string n, int m, int w, int l, int wp)
+{
+	if (!root)
+	{
+		root = new BSTNode(n, m, w, l, wp);
+		count++;
+		return;
+	}
+
+	BSTNode *temp = root;
+	BSTNode *parent = nullptr;
+
+	while (temp)
+	{
+		parent = temp;
+		if (w < temp->getWins())
+		{
+			temp = temp->getLeft();
+		}
+		else
+		{
+			temp = temp->getRight();
+		}
+	}
+
+	if (w < parent->getWins())
+	{
+		parent->setLeft(new BSTNode(n, m, w, l, wp));
+		count++;
+	}
+	else
+	{
+		parent->setRight(new BSTNode(n, m, w, l, wp));
 		count++;
 	}
 
@@ -179,8 +194,7 @@ void BST<T>::append(string n, int m, int w, int l, int wp)
 //*****************************************
 // to display a post order traversal
 //*****************************************
-template<class T>
-void BST<T>::PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const
+void BST::PostOrder(BSTNode *nodePtr, ofstream &ofs) const
 {
 
 	if (nodePtr)
@@ -190,14 +204,14 @@ void BST<T>::PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const
 
 		// write to commad scrn
 		cout << nodePtr->getName() << endl;
-		cout << nodePtr->getMatches() << andl;
+		cout << nodePtr->getMatches() << endl;
 		cout << nodePtr->getWins() << endl;
 		cout << nodePtr->getLosses() << endl;
 		cout << nodePtr->getWinPercent() << endl;
 
 		// write to output files
 		ofs << nodePtr->getName() << endl;
-		ofs << nodePtr->getMatches() << andl;
+		ofs << nodePtr->getMatches() << endl;
 		ofs << nodePtr->getWins() << endl;
 		ofs << nodePtr->getLosses() << endl;
 		ofs << nodePtr->getWinPercent() << endl;
@@ -208,10 +222,9 @@ void BST<T>::PostOrder(BSTNode<T> *nodePtr, ofstream &ofs) const
 // the BST. returns true/false.
 //*****************************************
 
-template<class T>
-bool BST<T>::SearchByName(string n)
+bool BST::SearchByName(string n)
 {
-	BSTNode<T> *newNode = root;
+	BSTNode *nodePtr = root;
 
 	while (nodePtr)
 	{
@@ -237,8 +250,7 @@ bool BST<T>::SearchByName(string n)
 // removes node from tree
 // by calling deleting node.
 //*****************************************
-template<class T>
-void BST<T>::remove(string n)
+void BST::remove(string n)
 {
 	deleteNode(n, root);
 }
@@ -248,8 +260,7 @@ void BST<T>::remove(string n)
 // that will delete the node and redefine the 
 // tree appropiately.
 //*****************************************
-template<class T>
-void BST<T>::deleteNode(string n, BSTNode<T> *nodePtr)
+void BST::deleteNode(string n, BSTNode *nodePtr)
 {
 	if (n < nodePtr->getName())
 	{
@@ -270,10 +281,9 @@ void BST<T>::deleteNode(string n, BSTNode<T> *nodePtr)
 // in tree to fit appropiately
 // by finding he smallest in the left tree
 //******************************************
-template<class T>
-void BST<T>::deletion(BSTNode<T> *nodePtr)
+void BST::deletion(BSTNode *nodePtr)
 {
-	BSTNode<T> *temp = nullptr;
+	BSTNode *temp = nullptr;
 
 	if (nodePtr == nullptr)
 	{
@@ -284,7 +294,7 @@ void BST<T>::deletion(BSTNode<T> *nodePtr)
 	else if (nodePtr->getRight() == nullptr)
 	{
 		temp = nodePtr;
-		nodePtr = nodePtr->left;
+		nodePtr = nodePtr->getLeft();
 		delete temp;
 		temp = nullptr;
 	}
@@ -292,7 +302,7 @@ void BST<T>::deletion(BSTNode<T> *nodePtr)
 	else if (nodePtr->getLeft() == nullptr)
 	{
 		temp = nodePtr;
-		nodePtr = nodePtr->right;
+		nodePtr = nodePtr->getRight();
 		delete temp;
 		temp = nullptr;
 	}
@@ -300,20 +310,21 @@ void BST<T>::deletion(BSTNode<T> *nodePtr)
 	else
 	{
 		// get right node
-		temp = nodePtr->right();
+		temp = nodePtr->getRight();
 
 		// get to end of left
-		while (nodePtr->getLeft)
+		while (nodePtr->getLeft())
 		{
-			temp = nodePtr->left;
+			temp = nodePtr->getLeft();
 
 		}
 		// reattach left subtree
-		temp->left = nodePtr->left;
+		temp->setLeft(nodePtr->getLeft());
+		//temp->left = nodePtr->left;
 		temp = nodePtr;
 		// reattach right subtre
-
-		temp->right = nodePtr->right;
+		temp->setRight(nodePtr->getRight());
+		//temp->getRight() = nodePtr->getRight();
 		delete temp;
 		temp = nullptr;
 
@@ -324,9 +335,7 @@ void BST<T>::deletion(BSTNode<T> *nodePtr)
 //**********************************************
 // to traverse tree breadth/level method
 //**********************************************
-
-template<class T>
-void BST<T>::breadth()
+void BST::breadth()
 {
 	//ofs << "this is breadth traversal of your data" << endl;
 
@@ -335,9 +344,9 @@ void BST<T>::breadth()
 		return;
 
 	// Create an empty queue for level order tarversal
-	Queue<BSTNode<T> *> q;
+	Queue<BSTNode *> q;
 
-	BSTNode<T> *temp = root;
+	BSTNode *temp = root;
 	// Enqueue Root and initialize height
 	q.enqueue(temp);
 
@@ -345,7 +354,13 @@ void BST<T>::breadth()
 	{
 		// Print front of queue and remove it from queue
 		temp = q.front();
-		cout << temp->getData() << " ";
+		cout << "*************************************************" << endl;
+		cout << "Player name: "<< temp->getName() << endl;
+		cout << "Wins: " << temp->getWins() << endl;
+		cout << "Losses: " << temp->getLosses() << endl;
+		cout << "Matches played: " << temp->getMatches() << endl;
+		cout << "Win Percent: " << temp->getWinPercent() << endl;
+		
 		//ofs << temp->getData() << " ";
 		q.dequeue();
 
@@ -358,4 +373,9 @@ void BST<T>::breadth()
 			q.enqueue(temp->getRight());
 	}
 }
+
+
+
+
+
 #endif
