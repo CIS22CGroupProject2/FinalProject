@@ -42,11 +42,5 @@ public:
 	}
 };
 
-struct player
-{
-	string name;
-	int matches, wins, losses, winPercent;
-	player* next;
-};
 
 #endif

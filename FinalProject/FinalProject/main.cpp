@@ -6,153 +6,25 @@
 #include "Hash.h"
 
 using namespace std;
+struct player
+{
+	string name;
+	int matches, wins, losses, winPercent;
+	player* next;
+};
 //void BinaryTest();
 void fileInput(List<struct player> &Data, Hash &hashdata);
 void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins);
 void deletePlayerFromHash(Hash&);
 void findPlayerFromHash(Hash&);
 void testBST(BST&);
-bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins);
+bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data);
 
-
-/*
-//add, delete and modify entries in BST and Hashtable
-string playername;         //input variables for user
-int m, w, l, winp;         //matches, wins, losses, win%
-
-void addEntry(BST<T> BStree, Hash hashdata){
-	cout << "Enter a new player to add" << endl;
-	cin >> playername;
-
-	cout << "Enter number of matches, wins , losses, and winning percentage" << endl;
-	cin >> m >> w >> l >> winp;
-	if(cin.fail()){
-		cin.clear();
-	}
-	//from Struct Player in LInkedListNode.h
-	player p;
-	p->name = playername;
-  p->matches = m;
-	p->wins = w;
-	p->losses = l;
-	p->winPercent = winp;
-
-	//add entry to BST
-	BStree.append(p);
-
-	//add entry to hashtable and print all entries
-	hashdata.addItem(playername, m, w, l, winp);
-	hashdata.PrintTable();
-
+std::ostream& operator<< (std::ostream &foo, player value)
+{
+	foo << value.name;
+	return foo;
 }
-
-
-//delete entry from BST and hashtable
-void deleteEntry(BST<T> BStree, Hash hashdata){
-	string pname;
-	 cout << "Enter a player name to delete from the list" << endl;
-	 cin >> pname;
-
-	bool playerfound = hashdata.FindPlayer(pname);
-	if(playerfound){
-	//delete player entry from hashtable
-	}
-  //if player entry is in the BST, remove the entry
-	if(BStree.Search(pname)){
-		BStree.remove(pname);
-	}
-	else{
-		cout << pname << "was not found in the BST" << endl;
-	}
-
-}
-
-
-void modifyEntry(BST<T> BStree, Hash hashdata){
-			int wp, won, lost, newmatch;
-			string nname; //newname
-	    string player;
-			cout << "Enter a player entry to modify" << endl;
-			cin >> player;
-
-			int choice;
-			bool loopchoice = true;
-
-			if(hashdata.FindPlayer(player)){
-				int index = hash(player)      //function from BST.hpp to find the index in hashtable of the player name entry from user
-				while(loopchoice){
-					cout << "Choose the player stat that you would like to change" << endl;
-					  << "1.Name" << endl;
-						<< "2.Matches" << endl;
-						<< "3.Wins" << endl;
-						<< "4.Losses" << endl;
-						<< "5.Winning Percentage" << endl;
-
-						cin >> choice;
-						if(cin.fail()){
-							cin.clear();
-							choice = 0;
-						}
-						if (choice < 1 || choice > 4) {
-				      cout << "Your selection is not valid. Please try again." << endl;
-		      	}
-						else{
-							if(choice == 1) {
-								 cout << "Enter the new name for the player" << endl;
-								 cin >> nname;
-
-							 	hashTable[index]->name = nname;
-
-							}
-							else if(choice == 2){
-								cout << "Enter the new value for total matches" << endl;
-								cin >> newmatch;
-
-							 hashTable[index]->matches = newmatch;
-
-							}
-
-							else if(choice == 3){
-								cout << "Enter the new value for the total wins" << endl;
-								cin >> won;
-
-							 hashTable[index]->wins = won;
-
-							}
-							else if(choice == 4){
-								cout << "Enter the new value for total losses" << endl;
-								cin >> lost;
-
-							 hashTable[index]->losses = lost;
-
-							}
-
-							else if(choice == 5){
-								cout << "Enter the new value for player's winning percentage" << endl;
-								cin >> wp;
-
-							 hashTable[index]->winPercent = wp;
-
-							}
-
-
-
-						}
-
-				}
-
-
-
-
-
-			}
-			else{
-				cout << "Player not found in hash table" << endl;
-			}
-}
-
-*/
-
 
 int main()
 {
@@ -165,14 +37,16 @@ int main()
 	bool inloop = true;
 	fileInput(Data, hashdata);
 	toBST(hashdata, bstbyname, bstbywins);
+	cout << &Data;
 	while (inloop == true)
 	{
-		inloop = menu(hashdata, bstbyname, bstbywins);
+		inloop = menu(hashdata, bstbyname, bstbywins, Data);
 	}
+	
 	system("pause");
 }
 
-void fileInput(List<struct player> &Data, Hash &hashdata)
+void fileInput(List<player> &Data, Hash &hashdata)
 {
 	ifstream infile;
 	int count = 0;
@@ -216,6 +90,7 @@ void fileInput(List<struct player> &Data, Hash &hashdata)
 			infile >> adding.winPercent;
 			getline(infile, taking1);
 			getline(infile, taking1);
+			Data.push_back(adding);
 			hashdata.addItem(adding.name, adding.matches, adding.wins, adding.losses, adding.winPercent);
 			count++;
 		}
@@ -227,10 +102,66 @@ void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins)
 {
 
 }
-bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins)
+bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
 {
 	bool inloop = true;
-	cout << "Choose from one of the following:" << endl;
+	int choice = 0;
+	cout << "Choose from one of the following by entering a number from the menu:" << endl;
+	cout << "(1). Add new data" << endl;
+	cout << "(2). Delete data" << endl;
+	cout << "(3). Find and display one data record using the primary key" << endl;
+	cout << "(4). List data in hash table sequence" << endl;
+	cout << "(5). List data in key sequence(sorted)" << endl;
+	cout << "(6). Print indented tree" << endl;
+	cout << "(7). Efficiency" << endl;
+	cout << "(8). <Team choice menu option>" << endl;
+	cout << "(9). Quit" << endl;
+	cin >> choice;
+	if (choice < 1 || choice > 9)
+	{
+		cout << endl << endl << "*************************************************************" << endl
+			<< "One of the menu items was not chosen. Please try again." << endl
+			<< "*************************************************************" << endl << endl;
+	}
+	else
+	{
+		if (choice == 1)
+		{
+
+		}
+		if (choice == 2)
+		{
+
+		}
+		if (choice == 3)
+		{
+
+		}
+		if (choice == 4)
+		{
+
+		}
+		if (choice == 5)
+		{
+
+		}
+		if (choice == 6)
+		{
+
+		}
+		if (choice == 7)
+		{
+
+		}
+		if (choice == 8)
+		{
+
+		}
+		if (choice == 9)
+		{
+
+		}
+	}
 	return inloop;
 }
 
@@ -257,3 +188,27 @@ void testBST(BST &tree1)
 {
 	tree1.breadth();
 }
+
+//******************************************************
+// operator<<        
+//******************************************************
+template <class T>
+std::ostream& operator<< (std::ostream &foo, List<T> *ListPtr)
+{
+	// Since operator<< is a friend of the List class, we can access
+	// it's members directly.
+	int itemCount = 0;
+	if (ListPtr->empty()) cout << "List is empty" << endl;
+	else
+	{
+		Node<T> *currPtr = ListPtr->getTail();
+		while (currPtr != nullptr)
+		{
+			itemCount++;
+			foo << itemCount << ". " << (currPtr->value) << endl;
+			currPtr = currPtr->next;
+		}
+	}
+	return foo;
+}
+
