@@ -117,51 +117,56 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	cout << "(8). <Team choice menu option>" << endl;
 	cout << "(9). Quit" << endl;
 	cin >> choice;
-	if (choice < 1 || choice > 9)
-	{
-		cout << endl << endl << "*************************************************************" << endl
-			<< "One of the menu items was not chosen. Please try again." << endl
-			<< "*************************************************************" << endl << endl;
-	}
-	else
-	{
-		if (choice == 1)
-		{
 
-		}
-		if (choice == 2)
+		switch (choice)
 		{
-
-		}
-		if (choice == 3)
+		case 1:
 		{
-
+			break;
 		}
-		if (choice == 4)
+		case 2:
 		{
-
+			break;
 		}
-		if (choice == 5)
+		case 3:
 		{
-
+			break;
 		}
-		if (choice == 6)
+		case 4:
 		{
-
+			break;
 		}
-		if (choice == 7)
+		case 5:
 		{
-
+			break;
 		}
-		if (choice == 8)
+		case 6:
 		{
-
+			break;
 		}
-		if (choice == 9)
+		case 7:
 		{
-
+			break;
 		}
-	}
+		case 8:
+		{
+			break;
+		}
+		case 9:
+		{
+			cout << "exiting program" << endl;
+			inloop = false;
+			break;
+		}
+		default:
+		{
+			cout << endl << endl << "*************************************************************" << endl
+				<< "One of the menu items was not chosen. Please try again." << endl
+				<< "*************************************************************" << endl << endl;
+			break;
+		}
+		}
+	
 	return inloop;
 }
 
