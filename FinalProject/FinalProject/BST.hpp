@@ -35,12 +35,10 @@ public:
 	// check if BST is empty
 	bool isEmpty();
 
-	//check if there is left/right child
-	bool Left(BSTNode *check);
-	bool Right(BSTNode *check);
-
 	// add new data to BST
-	void append(string n, int m, int w, int l, int wp);
+	void appendByName(string n, int m, int w, int l, int wp);
+	void appendByWins(string n, int m, int w, int l, int wp);
+
 	
 
 	// display a post order traversal of BST
@@ -52,7 +50,7 @@ public:
 	void PostOrder(BSTNode *nodePtr, ofstream &ofs) const;
 
 
-	// for breadth traversal
+	// for breadth traversals
 	void breadth();
 
 	// search for data
@@ -106,32 +104,12 @@ bool BST::isEmpty()
 		return false;
 }
 
-bool BST::Left(BSTNode *check)
-{
-	// if there is a left child 
-	// return true
-	if (!check->getLeft())
-		return true;
-	else
-		return false;
-
-}
-
-bool BST::Right(BSTNode *check)
-{
-	// if there is a right child
-	// return true
-	if (!check->getRight())
-		return true;
-	else
-		return false;
-}
-
 
 //********************************************************************
 // add new nodes in appropoates place in accordance of tree structure
+// according to ascii values of names
 //********************************************************************
-void BST::append(string n, int m, int w, int l, int wp)
+void BST::appendByName(string n, int m, int w, int l, int wp)
 {
 	if (!root)
 	{
@@ -164,6 +142,49 @@ void BST::append(string n, int m, int w, int l, int wp)
 	else
 	{
 		parent->setRight(new BSTNode( n,  m,  w,  l,  wp));
+		count++;
+	}
+
+}
+
+
+//********************************************************************
+// add new nodes in appropoates place in accordance of tree structure
+// according to value of wins
+//********************************************************************
+void BST::appendByWins(string n, int m, int w, int l, int wp)
+{
+	if (!root)
+	{
+		root = new BSTNode(n, m, w, l, wp);
+		count++;
+		return;
+	}
+
+	BSTNode *temp = root;
+	BSTNode *parent = nullptr;
+
+	while (temp)
+	{
+		parent = temp;
+		if (w < temp->getWins())
+		{
+			temp = temp->getLeft();
+		}
+		else
+		{
+			temp = temp->getRight();
+		}
+	}
+
+	if (w < parent->getWins())
+	{
+		parent->setLeft(new BSTNode(n, m, w, l, wp));
+		count++;
+	}
+	else
+	{
+		parent->setRight(new BSTNode(n, m, w, l, wp));
 		count++;
 	}
 
@@ -352,4 +373,9 @@ void BST::breadth()
 			q.enqueue(temp->getRight());
 	}
 }
+
+
+
+
+
 #endif
