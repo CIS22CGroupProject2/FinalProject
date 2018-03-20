@@ -159,7 +159,7 @@ int main()
 	List<struct player> Data;
 	Hash hashdata;
 	BST bstdata;
-	fileInput(Data, hashdata, &bstdata);
+	fileInput(Data, hashdata);
 	
 	system("pause");
 }
@@ -237,9 +237,5 @@ void findPlayerFromHash(Hash &hashdata)
 
 void testBST(BST &tree1)
 {
-
-
 	tree1.breadth();
-
-
 }
