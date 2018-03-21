@@ -147,6 +147,32 @@ Hash::player* Hash::FindPlayer(string name)
 	return Ptr;
 }
 
+void Hash::FindPlayer(int index, string name)
+{
+	player* Ptr = hashTable[index];
+
+	if (Ptr->name == "empty")
+	{
+		cout << "index = " << index << " is empty. Player not found";
+	}
+	else
+	{
+		while (Ptr != NULL)
+		{
+			if (Ptr->name == name)
+			{
+				cout << "*********************" << endl;
+				cout << Ptr->name << endl;
+				cout << "Number of matches played: " << Ptr->matches << endl;
+				cout << "Number of wins: " << Ptr->wins << endl;
+				cout << "Number of losses: " << Ptr->losses << endl;
+				cout << "Win Percentage: " << Ptr->winPercent << "%" << endl;
+				cout << "*********************" << endl;
+			}
+			Ptr = Ptr->next;
+		}
+	}
+}
 Hash::player* Hash::returnPlayerPointer(string name)
 {
 	int index = hash(name);

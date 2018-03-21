@@ -30,6 +30,7 @@ public:
 	void PrintTable();
 	void PrintItemsInIndex(int index);
 	player* Hash::FindPlayer(string name);
+	void FindPlayer(int index, string name);
 	void removePlayer(string name);
 	void printEachName();
 	player* returnPlayerPointer(string name);

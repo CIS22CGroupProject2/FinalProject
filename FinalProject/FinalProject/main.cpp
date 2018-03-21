@@ -176,7 +176,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 		}
 		else if (choice == 3)
 		{
-
+			hashFindName(hashdata);
 		}
 		else if (choice == 4)
 		{
@@ -219,23 +219,11 @@ void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct play
 void hashFindName(Hash &hashdata)
 {
 	string name;
+	int index;
 	cout << "Enter the name of the player you are trying to find: ";
 	cin >> name;
-	player *Ptr = hashdata.FindPlayer(name);
-	if (Ptr != NULL)
-	{
-		cout << "*********************" << endl;
-		cout << name << endl;
-		cout << "Number of matches played: " << Ptr->matches << endl;
-		cout << "Number of wins: " << Ptr->wins << endl;
-		cout << "Number of losses: " << Ptr->losses << endl;
-		cout << "Win Percentage: " << Ptr->winPercent << "%" << endl;
-		cout << "*********************" << endl;
-	}
-	else
-	{
-		cout << name << "'s info was not found in the hash table" << endl;
-	}
+	index = hashdata.hash(name);
+	hashdata.FindPlayer(index, name);
 }
 
 void hashPrint(Hash &hashdata)
