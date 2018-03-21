@@ -21,7 +21,6 @@ Hash::Hash()
 
 int Hash::hash(string key)
 {
-	cout << key;
 	int hash = 0;
 	int index;
 

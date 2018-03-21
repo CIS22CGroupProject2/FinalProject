@@ -128,6 +128,22 @@ void fileExport(List<struct player> &Data)
 		cerr << "Open Failed";
 		exit(3);
 	}
+	else
+	{
+		Node<struct player> *currPtr = Data.getTail();
+		while (currPtr != nullptr)
+		{
+			outfile << currPtr->value.name << endl;
+			outfile << "Overall Matches --- " << currPtr->value.matches << endl;
+			outfile << "Win / Loss Record --- " << currPtr->value.wins << "--" << currPtr->value.losses << endl;
+			outfile << "Winning Percentage --- " << currPtr->value.winPercent << "%";
+			if (currPtr->next != nullptr)
+			{
+				outfile << endl << endl;
+			}
+			currPtr = currPtr->next;
+		}
+	}
 }
 
 void toBST(List<struct player> &Data, BST &bstbyname, BST &bstbywins)
@@ -168,7 +184,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	{
 		if (choice == 1)
 		{
-			
+			addData(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 2)
 		{
@@ -273,6 +289,7 @@ void hashFindName(Hash &hashdata)
 	int index;
 	cout << "Enter the name of the player you are trying to find: ";
 	cin >> name;
+	cout << endl << endl;
 	index = hashdata.hash(name);
 	hashdata.FindPlayer(index, name);
 }
