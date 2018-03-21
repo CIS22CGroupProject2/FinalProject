@@ -28,13 +28,13 @@ public:
 	unsigned int operationsDelete = 0;
 	//constructor
 	// initilizes data nd Pnext
-	LLNode(T x) { data = x; pNext = nullptr; }
+	LLNode(T x) { data = x; pNext = nullptr; operationsTotal += 1;}
 	//returns data
-	T getData() { return data; }
+	T getData() { return data; operationsTotal += 1;}
 	// return next pointer  
-	LLNode<T> *getNext() { return pNext; }
+	LLNode<T> *getNext() { return pNext; operationsTotal += 1;}
 	// sets next pointer
-	void setNext(LLNode<T> *next) { pNext = next; }
+	void setNext(LLNode<T> *next) { pNext = next; operationsTotal += 1;}
 
 	//destructor
 	~LLNode() {}

@@ -34,6 +34,7 @@ void BSTPrint(BST &bstbyname, BST &bstbywins);
 //Display BST Tree with Indentations
 void BSTIndent(BST &bstbyname, BST &bstbywins);
 //Display Efficiency
+void PrintEfficiency(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data);
 
 std::ostream& operator<< (std::ostream &foo, player value)
 {
@@ -48,8 +49,6 @@ std::ostream& operator<< (std::ostream &foo, player value)
 
 int main()
 {
-
-
 	List<struct player> Data;
 	Hash hashdata;
 	BST bstbyname;
@@ -187,30 +186,36 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 		if (choice == 1)
 		{
 			addData(hashdata, bstbyname, bstbywins, Data);
+			PrintEfficiency(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 2)
 		{
 			removeData(hashdata, bstbyname, bstbywins, Data);
+			PrintEfficiency(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 3)
 		{
 			hashFindName(hashdata);
+			PrintEfficiency(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 4)
 		{
 			hashdata.PrintTable();
+			PrintEfficiency(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 5)
 		{
 			BSTPrint(bstbyname, bstbywins);
+			PrintEfficiency(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 6)
 		{
 			BSTIndent(bstbyname, bstbywins);
+			PrintEfficiency(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 7)
 		{
-
+			PrintEfficiency(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 8)
 		{
@@ -374,6 +379,16 @@ void BSTIndent(BST &bstbyname, BST &bstbywins)
 	{
 		cout << "An incorrect choice was selected" << endl;
 	}
+}
+
+void PrintEfficiency(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
+{
+	int total = 0;
+	total += hashdata.operationsTotal;
+	total += bstbyname.operationsTotal;
+	total += bstbywins.operationsTotal;
+	cout << "The total number of operations performed is " << total << " operations" << endl << endl;
+	cout << "The total number of collions is " << hashdata.numberOfCollisions() << endl << endl;
 }
 
 //******************************************************

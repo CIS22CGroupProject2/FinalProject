@@ -27,41 +27,45 @@ public:
 	unsigned int operationsInsert = 0;
 	unsigned int operationsFind = 0;
 	unsigned int operationsDelete = 0;
-	//defautl constructor
-	BST() { root = nullptr; count = 0; }
+	//defautl ructor
+	BST() { root = nullptr; count = 0; operationsTotal += 2; }
 
 	
 	// getters and setters for root
-	BSTNode *getRoot() { return root; }
+	BSTNode *getRoot() { return root; operationsTotal += 1; }
 
 	// returns count of nodes in BST
-	int getCount() { return count; }
+	int getCount() { return count; operationsTotal += 1; }
 
 	// check if BST is empty
 	bool isEmpty();
 
+	void operationsAdd(int x) { operationsTotal += x; }
 	// add new data to BST
 	void appendByName(string n, int m, int w, int l, int wp);
 	void appendByWins(string n, int m, int w, int l, int wp);
 
-	void PreOrder(BSTNode *nodePtr, int level = 0) const;
+	void PreOrder(BSTNode *nodePtr, int level = 0) ;
 
 	// display a post order traversal of BST
-	void displayPostOrder() const
+	void displayPostOrder()
 	{
 		PostOrder(root);
+		operationsTotal += 1;
 	}
 
-	void PostOrder(BSTNode *nodePtr) const;
-	void displayPreOrder() const
+	void PostOrder(BSTNode *nodePtr);
+	void displayPreOrder()
 	{
 		PreOrder(root);
+		operationsTotal += 1;
 	}
-	void displayInOrder() const
+	void displayInOrder()
 	{
 		inOrder(root);
+		operationsTotal += 1;
 	}
-	void inOrder(BSTNode *nodePtr) const;
+	void inOrder(BSTNode *nodePtr);
 
 
 	// for breadth traversals
@@ -87,6 +91,7 @@ public:
 		{
 			destroyRec(nodePtr);
 		}
+		operationsTotal += 4;
 	}
 
 	void destroyRec(BSTNode *nodeptr)
@@ -97,8 +102,9 @@ public:
 			destroyRec(nodeptr->getRight());
 			delete nodeptr;
 			nodeptr = nullptr;
-
+			operationsTotal += 3;
 		}
+		operationsTotal += 1;
 	}
 };
 
@@ -116,6 +122,7 @@ bool BST::isEmpty()
 	// return false
 	else
 		return false;
+	operationsTotal += 2;
 }
 
 
@@ -130,11 +137,12 @@ void BST::appendByName(string n, int m, int w, int l, int wp)
 		root = new BSTNode(n, m, w, l, wp);
 		count++;
 		return;
+		operationsTotal += 3;
 	}
-
+	operationsTotal += 1;
 	BSTNode *temp = root;
 	BSTNode *parent = nullptr;
-
+	operationsTotal += 2;
 	while (temp)
 	{
 		parent = temp;
@@ -146,6 +154,7 @@ void BST::appendByName(string n, int m, int w, int l, int wp)
 		{
 			temp = temp->getRight();
 		}
+		operationsTotal += 4;
 	}
 
 	if (n < parent->getName())
@@ -158,7 +167,7 @@ void BST::appendByName(string n, int m, int w, int l, int wp)
 		parent->setRight(new BSTNode( n,  m,  w,  l,  wp));
 		count++;
 	}
-
+	operationsTotal += 3;
 }
 
 
@@ -173,11 +182,12 @@ void BST::appendByWins(string n, int m, int w, int l, int wp)
 		root = new BSTNode(n, m, w, l, wp);
 		count++;
 		return;
+		operationsTotal += 3;
 	}
-
+	operationsTotal += 1;
 	BSTNode *temp = root;
 	BSTNode *parent = nullptr;
-
+	operationsTotal += 2;
 	while (temp)
 	{
 		parent = temp;
@@ -189,6 +199,7 @@ void BST::appendByWins(string n, int m, int w, int l, int wp)
 		{
 			temp = temp->getRight();
 		}
+		operationsTotal += 4;
 	}
 
 	if (w < parent->getWins())
@@ -201,6 +212,7 @@ void BST::appendByWins(string n, int m, int w, int l, int wp)
 		parent->setRight(new BSTNode(n, m, w, l, wp));
 		count++;
 	}
+	operationsTotal += 3;
 
 }
 
@@ -208,7 +220,7 @@ void BST::appendByWins(string n, int m, int w, int l, int wp)
 //*****************************************
 // to display a post order traversal
 //*****************************************
-void BST::PostOrder(BSTNode *nodePtr) const
+void BST::PostOrder(BSTNode *nodePtr) 
 {
 
 	if (nodePtr)
@@ -222,10 +234,12 @@ void BST::PostOrder(BSTNode *nodePtr) const
 		cout << nodePtr->getWins() << endl;
 		cout << nodePtr->getLosses() << endl;
 		cout << nodePtr->getWinPercent() << endl;
+		operationsTotal += 7;
 	}
+	operationsTotal += 1;
 }
 
-void BST::inOrder(BSTNode *nodePtr) const
+void BST::inOrder(BSTNode *nodePtr) 
 {
 	if (nodePtr)
 	{
@@ -239,16 +253,16 @@ void BST::inOrder(BSTNode *nodePtr) const
 			<< setw(4) << nodePtr->getWinPercent() << "%";
 		cout << endl;
 		inOrder(nodePtr->getRight());
-
+		operationsTotal += 18;
 		
 	}
-
+	operationsTotal += 1;
 }
 
 //*****************************************
 // to display a pre order traversal
 //*****************************************
-void BST::PreOrder(BSTNode *nodePtr, int level) const
+void BST::PreOrder(BSTNode *nodePtr, int level) 
 {
 	level++;
 	if (nodePtr)
@@ -256,6 +270,7 @@ void BST::PreOrder(BSTNode *nodePtr, int level) const
 		for (int x = 0; x < level; x++)
 		{
 			cout << " ";
+			operationsTotal += 1;
 		}
 		cout << nodePtr->getName();
 		cout << " Wins: ";
@@ -263,8 +278,9 @@ void BST::PreOrder(BSTNode *nodePtr, int level) const
 
 		PreOrder(nodePtr->getLeft(), level);
 		PreOrder(nodePtr->getRight(), level);
-
+		operationsTotal += 6;
 	}
+	operationsTotal += 2;
 }
 
 //*****************************************
@@ -275,25 +291,30 @@ void BST::PreOrder(BSTNode *nodePtr, int level) const
 bool BST::SearchByName(string n)
 {
 	BSTNode *nodePtr = root;
-
+	operationsTotal += 1;
 	while (nodePtr)
 	{
 		if (nodePtr->getName() == n)
 		{
+			operationsTotal += 1;
 			return true;
 		}
 		else
 		{
 			if (n < nodePtr->getName())
 			{
+				operationsTotal += 1;
 				nodePtr->getLeft();
 			}
 			else
 			{
+				operationsTotal += 1;
 				nodePtr->getRight();
 			}
+			operationsTotal += 1;
 		}// end if
 	}// end while
+	operationsTotal += 1;
 	return false;
 }
 //*****************************************
@@ -304,6 +325,7 @@ bool BST::remove(string n)
 {
 	bool x = deleteNode(n, root);
 	return x;
+	operationsTotal += 2;
 }
 //**********************************************
 // find the node in the binary tree
@@ -327,7 +349,9 @@ bool BST::deleteNode(string n, BSTNode *nodePtr)
 	{
 		deletion(nodePtr);
 		x = true;
+		operationsTotal += 1;
 	}
+	operationsTotal += 4;
 	return x;
 }
 //******************************************
@@ -338,10 +362,11 @@ bool BST::deleteNode(string n, BSTNode *nodePtr)
 void BST::deletion(BSTNode *nodePtr)
 {
 	BSTNode *temp = nullptr;
-
+	operationsTotal += 1;
 	if (nodePtr == nullptr)
 	{
 		cout << "Cannot delete empty node....." << endl;
+		operationsTotal += 2;
 		return;
 	}
 	// if only left child
@@ -351,6 +376,7 @@ void BST::deletion(BSTNode *nodePtr)
 		nodePtr = nodePtr->getLeft();
 		delete temp;
 		temp = nullptr;
+		operationsTotal += 4;
 	}
 	// if only right child
 	else if (nodePtr->getLeft() == nullptr)
@@ -359,6 +385,7 @@ void BST::deletion(BSTNode *nodePtr)
 		nodePtr = nodePtr->getRight();
 		delete temp;
 		temp = nullptr;
+		operationsTotal += 4;
 	}
 	// if rooot has both left and right children
 	else
@@ -370,7 +397,7 @@ void BST::deletion(BSTNode *nodePtr)
 		while (temp->getLeft() !=nullptr)
 		{
 			temp = nodePtr->getLeft();
-			
+			operationsTotal += 2;
 		}
 		// reattach left subtree
 		temp->setLeft(nodePtr->getLeft());
@@ -381,6 +408,7 @@ void BST::deletion(BSTNode *nodePtr)
 		//temp->getRight() = nodePtr->getRight();
 		delete temp;
 		temp = nullptr;
+		operationsTotal += 8;
 
 
 	}
@@ -395,7 +423,10 @@ void BST::breadth()
 
 	// Base Case
 	if (root == nullptr)
+	{
+		operationsTotal += 2;
 		return;
+	}
 
 	// Create an empty queue for level order tarversal
 	Queue<BSTNode *> q;
@@ -403,7 +434,7 @@ void BST::breadth()
 	BSTNode *temp = root;
 	// Enqueue Root and initialize height
 	q.enqueue(temp);
-
+	operationsTotal += 3;
 	while (q.getNum() != 0)
 	{
 		// Print front of queue and remove it from queue
@@ -414,7 +445,7 @@ void BST::breadth()
 		cout << "Losses: " << temp->getLosses() << endl;
 		cout << "Matches played: " << temp->getMatches() << endl;
 		cout << "Win Percent: " << temp->getWinPercent() << endl;
-		
+		operationsTotal += 20;
 		//ofs << temp->getData() << " ";
 		q.dequeue();
 
@@ -425,6 +456,7 @@ void BST::breadth()
 		/*Enqueue right child */
 		if (temp->getRight() != nullptr)
 			q.enqueue(temp->getRight());
+		operationsTotal += 2;
 	}
 }
 

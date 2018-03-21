@@ -37,30 +37,31 @@ public:
 
 		left = nullptr;
 		right = nullptr; 
+		operationsTotal += 7;
 	}
 	
 	// setters
-	void setName(std::string n) { name = n; }
-	void setMatches(int m) { matches = m; }
-	void setWins(int w) { wins = w; }
-	void setLosses(int l) { losses = l; }
-	void setWinPercent(int wp) { winPercent = wp; }
+	void setName(std::string n) { name = n; operationsTotal += 1; }
+	void setMatches(int m) { matches = m; operationsTotal += 1; }
+	void setWins(int w) { wins = w; operationsTotal += 1; }
+	void setLosses(int l) { losses = l; operationsTotal += 1; }
+	void setWinPercent(int wp) { winPercent = wp; operationsTotal += 1; }
 
 	//getters
-	std::string getName() { return name; }
-	int getMatches() { return matches; }
-	int getWins() { return wins; }
-	int getLosses() { return losses; }
-	int getWinPercent() { return winPercent; }
+	std::string getName() { return name; operationsTotal += 1;}
+	int getMatches() { return matches; operationsTotal += 1;}
+	int getWins() { return wins; operationsTotal += 1;}
+	int getLosses() { return losses; operationsTotal += 1;}
+	int getWinPercent() { return winPercent; operationsTotal += 1;}
 
 
 	//get and setters for left child
-	void setLeft(BSTNode *l) { left = l; }
-	BSTNode *getLeft() { return left; }
+	void setLeft(BSTNode *l) { left = l; operationsTotal += 1;}
+	BSTNode *getLeft() { return left; operationsTotal += 1;}
 
 	//getters and setters for right child
-	void setRight(BSTNode *r) { right = r; }
-	BSTNode *getRight() { return right; }
+	void setRight(BSTNode *r) { right = r; operationsTotal += 1;}
+	BSTNode *getRight() { return right; operationsTotal += 1;}
 
 
 	//destructor

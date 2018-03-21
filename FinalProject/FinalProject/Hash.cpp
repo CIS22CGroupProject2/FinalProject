@@ -16,15 +16,23 @@ Hash::Hash()
 		hashTable[i]->losses = 0;
 		hashTable[i]->winPercent = 0;
 		hashTable[i]->next = NULL;
+		operationsTotal += 7;
 	}
 }
 
 int Hash::numberOfCollisions()
 {
+	int num;
 	int count = 0;
-	for (int i = 0; i <= tableSize; i++)
+	for (int i = 0; i < tableSize; i++)
 	{
-		count += numberOfItemsInIndex(i);
+		num = numberOfItemsInIndex(i);
+		if (num == 1)
+		{
+			continue;
+		}
+		count += num;
+		operationsTotal += 3;
 	}
 	return count;
 }
@@ -36,8 +44,10 @@ int Hash::hash(string key)
 	for (int i = 0; i < 3; i++)
 	{
 		hash = (hash+(int)key[i])*17;
+		operationsTotal += 3;
 	}
 	index = hash % tableSize;
+	operationsTotal += 2;
 	return index;
 }
 
@@ -52,7 +62,7 @@ void Hash::addItem(string name, int matches, int wins, int losses, int winPercen
 		hashTable[index]->wins = wins;
 		hashTable[index]->losses = losses;
 		hashTable[index]->winPercent = winPercent;
-
+		operationsTotal += 7;
 	}
 	else
 	{
@@ -71,10 +81,11 @@ void Hash::addItem(string name, int matches, int wins, int losses, int winPercen
 		{
 			Ptr = Ptr->next;
 			i++;
+			operationsTotal += 3;
 		}
 
 		Ptr->next = n;
-		
+		operationsTotal += 9;
 	}
 }
 
@@ -83,19 +94,23 @@ int Hash::numberOfItemsInIndex(int index)
 	int count = 0;
 	if (hashTable[index]->name == "empty")
 	{
+		operationsTotal += 2;
 		return count;
 	}
 	else
 	{
+		operationsTotal += 3;
 		count++;
 		player* ptr = hashTable[index];
 		while (ptr->next != NULL)
 		{
+			operationsTotal += 2;
 			count++;
 			ptr = ptr->next;
 		}
 	}
 	return count;
+
 }
 
 void Hash::PrintTable()
@@ -105,6 +120,7 @@ void Hash::PrintTable()
 	{
 		player* y = hashTable[i];
 		number = numberOfItemsInIndex(i);
+		operationsTotal += 4;
 		for (int x = 0; x < number; x++)
 		{
 			cout << "*********************" << endl;
@@ -117,6 +133,7 @@ void Hash::PrintTable()
 			cout << "# of items = " << number << endl;
 			cout << "*********************" << endl;
 			y = y->next;
+			operationsTotal += 15;
 		}
 	}
 }
@@ -144,6 +161,7 @@ void Hash::PrintItemsInIndex(int index)
 			Ptr = Ptr->next;
 		}
 	}
+	operationsTotal += 15;
 }
 
 Hash::player* Hash::FindPlayer(string name)
@@ -161,10 +179,13 @@ Hash::player* Hash::FindPlayer(string name)
 			wins = Ptr->wins;
 			losses = Ptr->losses;
 			winPercent = Ptr->winPercent;
+			operationsTotal += 5;
 			break;
 		}
 		Ptr = Ptr->next;
+		operationsTotal += 3;
 	}
+
 	return Ptr;
 }
 
@@ -175,6 +196,7 @@ void Hash::FindPlayer(int index, string name)
 	if (Ptr->name == "empty")
 	{
 		cout << "index = " << index << " is empty. Player not found";
+		operationsTotal += 2;
 	}
 	else
 	{
@@ -191,7 +213,9 @@ void Hash::FindPlayer(int index, string name)
 				cout << "*********************" << endl;
 			}
 			Ptr = Ptr->next;
+			operationsTotal += 7;
 		}
+		operationsTotal += 1;
 	}
 }
 Hash::player* Hash::returnPlayerPointer(string name)
@@ -205,8 +229,10 @@ Hash::player* Hash::returnPlayerPointer(string name)
 		{
 			foundName = true;
 			break;
+			operationsTotal += 1;
 		}
 		Ptr = Ptr->next;
+		operationsTotal += 3;
 	}
 	return Ptr;
 }
@@ -222,6 +248,7 @@ void Hash::removePlayer(string name)
 	if (hashTable[index]->name == "empty")
 	{
 		cout << name << " was not found in the Hash table" << endl;
+		operationsTotal += 1;
 	}
 	else if (hashTable[index]->name == name && hashTable[index]->next == NULL)
 	{
@@ -231,6 +258,7 @@ void Hash::removePlayer(string name)
 		hashTable[index]->winPercent = 0;
 		hashTable[index]->wins = 0;
 		cout << name << " was removed from Hash Table" << endl;
+		operationsTotal += 7;
 	}
 	
 	else if (hashTable[index]->name == name)
@@ -239,19 +267,23 @@ void Hash::removePlayer(string name)
 		hashTable[index] = hashTable[index]->next;
 		delete delPtr;
 		cout << name << " was removed from Hash Table" << endl;
+		operationsTotal += 7;
 	}
 	else
 	{
 		P1 = hashTable[index]->next;
 		P2 = hashTable[index];
+		operationsTotal += 5;
 		while (P1 != NULL && P1->name != name)
 		{
 			P2 = P1;
 			P1 = P1->next;
+			operationsTotal += 4;
 		}
 		if (P1 == NULL)
 		{
 			cout << name << " was not found in the Hash table" << endl;
+			operationsTotal += 1;
 		}
 		else
 		{
@@ -261,6 +293,7 @@ void Hash::removePlayer(string name)
 
 			delete delPtr;
 			cout << name << " was removed from Hash Table" << endl;
+			operationsTotal += 4;
 		}
 	}
 	
@@ -272,23 +305,28 @@ void Hash::printEachName()
 	int index = 0;
 	int i = 0;
 	player* Ptr;
+	operationsTotal += 3;
 	while (index < tableSize)
 	{
 		Ptr = hashTable[index];
 		if (Ptr->name == "empty")
 		{
 			index++;
+			operationsTotal += 2;
 			continue;
 		}
 		else
 		{
+			operationsTotal += 1;
 			while (Ptr != NULL)
 			{
 				cout << i << ") " <<Ptr->name << endl;
 				i++;
 				Ptr = Ptr->next;
+				operationsTotal += 3;
 			}
 		}
 		index++;
+		operationsTotal += 2;
 	}
 }

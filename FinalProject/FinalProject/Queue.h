@@ -40,6 +40,7 @@ public:
 template <class T>
 Queue<T>::Queue()
 {
+	operationsTotal += 1;
 	List();
 
 }
@@ -48,6 +49,7 @@ Queue<T>::Queue()
 template <class T>
 Queue<T>::~Queue()
 {
+	operationsTotal += 1;
 	clear();
 }
 
@@ -56,6 +58,7 @@ Queue<T>::~Queue()
 template <class T>
 bool Queue<T>::enqueue(newEntry)
 {
+	operationsTotal += 1;
 	return push_back(newEntry);
 }
 
@@ -64,6 +67,7 @@ bool Queue<T>::enqueue(newEntry)
 template <class T>
 bool Queue<T>::dequeue()
 {
+	operationsTotal += 1;
 	return remove(1);
 }
 
@@ -72,6 +76,7 @@ bool Queue<T>::dequeue()
 template <class T>
 bool Queue<T>::empty()
 {
+	operationsTotal += 1;
 	return List::empty();
 }
 
@@ -81,6 +86,7 @@ bool Queue<T>::empty()
 template <class T>
 int Queue<T>::size()
 {
+	operationsTotal += 1;
 	return List::size();
 }
 
@@ -89,6 +95,7 @@ int Queue<T>::size()
 template <class T>
 void Queue<T>::clear()
 {
+	operationsTotal += 1;
 	List::clear();
 }
 
@@ -98,6 +105,7 @@ void Queue<T>::clear()
 template <class T>
 T Queue<T>::front()
 {
+	operationsTotal += 1;
 	return getValue(1);
 }
 
@@ -106,6 +114,7 @@ T Queue<T>::front()
 template <class T>
 T Queue<T>::rear()
 {
+	operationsTotal += 1;
 	return getValue(size() - 1);
 }
 

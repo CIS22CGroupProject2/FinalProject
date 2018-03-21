@@ -45,6 +45,7 @@ public:
 	~Hash()
 	{
 		player* Ptr;
+		operationsTotal += 1;
 		for (int i = 0; i<tableSize; i++)
 		{
 			while (hashTable[i] != NULL)
@@ -52,7 +53,9 @@ public:
 				Ptr = hashTable[i];
 				hashTable[i] = hashTable[i]->next;
 				delete Ptr;
+				operationsTotal += 4;
 			}
+			operationsTotal += 2;
 		}
 	}
 	

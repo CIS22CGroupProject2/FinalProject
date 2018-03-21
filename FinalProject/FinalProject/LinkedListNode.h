@@ -35,6 +35,7 @@ public:
 	{
 		value = nodeValue;
 		next = nullptr;
+		operationsTotal += 2;
 	}
 
 	//******************************************************
@@ -42,6 +43,7 @@ public:
 	//******************************************************
 	~Node()
 	{
+		operationsTotal += 1;
 		next = nullptr;
 	}
 };

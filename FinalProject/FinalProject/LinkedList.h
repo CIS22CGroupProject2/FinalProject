@@ -63,7 +63,9 @@ public:
 template<class T>
 bool List<T>::empty()
 {
-	if (itemCount == 0) return true;
+	operationsTotal += 2;
+	if (itemCount == 0) 
+		return true;
 	return false;
 }
 
@@ -75,6 +77,7 @@ bool List<T>::empty()
 template<class T>
 int List<T>::size() const
 {
+	operationsTotal += 1;
 	return itemCount;
 }
 
@@ -101,6 +104,7 @@ bool List<T>::push_back(T newEntry)
 		tail = newNode;
 		head = tail;
 		itemCount++;
+		operationsTotal += 3;
 	}
 	else
 	{
@@ -112,7 +116,10 @@ bool List<T>::push_back(T newEntry)
 		currentNode->next = newNode;
 		head = currentNode->next;
 		itemCount++;
+		operationsTotal += 6;
 	}
+	operationsTotal += 5;
+	operationsTotal += newNode->operationsTotal;
 	return returnStatus;
 }
 //******************************************************
@@ -146,14 +153,19 @@ bool List<T>::insert(int position, T val)
 				else tail = newNode;
 				if (i != itemCount - 1) newNode->next = currentNode;
 				else head = newNode;
+				operationsTotal += 6;
 			}
 			else
 			{
 				prevNode = currentNode;
 				currentNode = currentNode->next;
+				operationsTotal += 3;
 			}
+			operationsTotal += 2;
 		}
 	}
+	operationsTotal += newNode->operationsTotal;
+	operationsTotal += currentNode->operationsTotal;
 	return returnStatus;
 }
 //******************************************************
@@ -175,7 +187,7 @@ bool List<T>::erase(int indexRemove)
 	currentNode = tail;
 	prevNode = nullptr;
 	deletedNode = nullptr;
-
+	operationsTotal += 7;
 	if (indexRemove >= 0 && indexRemove < itemCount)
 	{
 		// loop starts from tail and moves towards head.
@@ -241,6 +253,7 @@ bool List<T>::remove(T anEntry)
 		currentNode = currentNode->next;
 		delete tail;
 		tail = currentNode;
+		operationsTotal += 4;
 	}
 	else
 	{
@@ -249,6 +262,7 @@ bool List<T>::remove(T anEntry)
 		{
 			prevNode = currentNode;
 			currentNode = currentNode->next;
+			operationsTotal += 4;
 		}
 
 		if (currentNode->value == anEntry && head->value == anEntry)
@@ -257,17 +271,20 @@ bool List<T>::remove(T anEntry)
 			//delete currentNode;
 			//delete head;
 			head = prevNode;
+			operationsTotal += 4;
 
 		}
 		else if (currentNode->value == anEntry)
 		{
 			prevNode->next = currentNode->next;
 			delete currentNode;
+			operationsTotal += 3;
 		}
 	}
 	if (itemCount != 0)
 	{
 		itemCount--;
+		operationsTotal += 2;
 	}
 	return returnStatus;
 }
@@ -285,7 +302,9 @@ bool List<T>::find(T anEntry)
 	currentNode = tail;
 	while (currentNode)
 	{
-		if (currentNode->value == anEntry) return true;
+		operationsTotal += 2;
+		if (currentNode->value == anEntry) 
+			return true;
 		else currentNode = currentNode->next;
 	}
 	return false;
@@ -302,9 +321,10 @@ T List<T>::getValue(int indexGet)
 	T returnValue;
 
 	currentNode = tail;
-
+	operationsTotal += 3;
 	if (indexGet >= 0 && indexGet < itemCount)
 	{
+		operationsTotal += 2;
 		// loop starts from tail and moves towards head.
 		for (int i = 0; i <= indexGet; i++)
 		{
@@ -318,6 +338,7 @@ T List<T>::getValue(int indexGet)
 			{
 				currentNode = currentNode->next;
 			}
+			operationsTotal += 4;
 		}
 	}
 	return returnValue;
@@ -334,7 +355,7 @@ void List<T>::clear()
 	Node<T> *currentNode;
 	Node<T> *deletedNode;
 	Node<T> *nextNode;
-
+	operationsTotal += 4;
 	if (!empty())
 	{
 		currentNode = tail;
@@ -344,7 +365,9 @@ void List<T>::clear()
 			deletedNode = currentNode;
 			currentNode = nextNode;
 			delete deletedNode;
+			operationsTotal += 5;
 		}
+		operationsTotal += 2;
 	}
 	itemCount = 0;
 }
@@ -368,6 +391,7 @@ List<T>::List()
 	head = nullptr;
 	tail = nullptr;
 	itemCount = 0;
+	operationsTotal += 3;
 }
 //******************************************************
 // Destructor          
