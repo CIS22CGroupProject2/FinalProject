@@ -57,8 +57,8 @@ public:
 	bool SearchByName(string n);
 
 	// deletion in BST
-	void remove(string n);
-	void deleteNode(string n, BSTNode *nodePtr);
+	bool remove(string n);
+	bool deleteNode(string n, BSTNode *nodePtr);
 	void deletion(BSTNode *nodePtr);
 
 	//destructor
@@ -250,9 +250,10 @@ bool BST::SearchByName(string n)
 // removes node from tree
 // by calling deleting node.
 //*****************************************
-void BST::remove(string n)
+bool BST::remove(string n)
 {
-	deleteNode(n, root);
+	bool x = deleteNode(n, root);
+	return x;
 }
 //**********************************************
 // find the node in the binary tree
@@ -260,21 +261,24 @@ void BST::remove(string n)
 // that will delete the node and redefine the 
 // tree appropiately.
 //*****************************************
-void BST::deleteNode(string n, BSTNode *nodePtr)
+bool BST::deleteNode(string n, BSTNode *nodePtr)
 {
-	if (n < nodePtr->getName())
+	bool x = false;
+	if (n < nodePtr->getName() && nodePtr != NULL)
 	{
-		deleteNode(n, nodePtr->getLeft());
+		x = deleteNode(n, nodePtr->getLeft());
 
 	}
-	else if (n > nodePtr->getName())
+	else if (n > nodePtr->getName() && nodePtr != NULL)
 	{
-		deleteNode(n, nodePtr->getRight());
+		x = deleteNode(n, nodePtr->getRight());
 	}
 	else
 	{
 		deletion(nodePtr);
+		x = true;
 	}
+	return x;
 }
 //******************************************
 // deletes node in BST and reattaches nodes

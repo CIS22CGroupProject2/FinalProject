@@ -6,15 +6,14 @@
 //**************************
 
 #include <string>
-#include<iostream>
+#include <iostream>
 #include "LinkedList.h"
-using namespace std;
 
 class BSTNode
 {
 private:
 	// data in node for BST
-	string name;
+	std::string name;
 	int matches, wins, losses, winPercent;
 	BSTNode *left;
 	BSTNode *right;
@@ -23,7 +22,7 @@ public:
 	//default constructor
 	BSTNode() {}
 	//constructor
-	BSTNode(string n, int m, int w, int l, int wp) 
+	BSTNode(std::string n, int m, int w, int l, int wp) 
 	{
 		name = n;
 		matches = m;
@@ -36,14 +35,14 @@ public:
 	}
 	
 	// setters
-	void setName(string n) { name = n; }
+	void setName(std::string n) { name = n; }
 	void setMatches(int m) { matches = m; }
 	void setWins(int w) { wins = w; }
 	void setLosses(int l) { losses = l; }
 	void setWinPercent(int wp) { winPercent = wp; }
 
 	//getters
-	string getName() { return name; }
+	std::string getName() { return name; }
 	int getMatches() { return matches; }
 	int getWins() { return wins; }
 	int getLosses() { return losses; }

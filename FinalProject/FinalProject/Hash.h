@@ -1,13 +1,13 @@
 #pragma once
-#include <cstdlib>
-#include <iostream>
-#include <string>
 
-using namespace std;
 
 
 #ifndef Hash_h
 #define Hash_h
+
+#include <cstdlib>
+#include <iostream>
+#include <string>
 
 class Hash
 {
@@ -16,7 +16,7 @@ private:
 	static const int tableSize = 70;
 	struct player
 	{
-		string name;
+		std::string name;
 		int matches, wins, losses, winPercent;
 		player* next;
 	};
@@ -24,16 +24,16 @@ private:
 public:
 	player * location;
 	Hash();
-	int hash(string key);
-	void addItem(string name, int matches, int wins, int losses, int winPercent);
+	int hash(std::string key);
+	void addItem(std::string name, int matches, int wins, int losses, int winPercent);
 	int numberOfItemsInIndex(int index);
 	void PrintTable();
 	void PrintItemsInIndex(int index);
-	player* Hash::FindPlayer(string name);
-	void FindPlayer(int index, string name);
-	void removePlayer(string name);
+	player* Hash::FindPlayer(std::string name);
+	void FindPlayer(int index, std::string name);
+	void removePlayer(std::string name);
 	void printEachName();
-	player* returnPlayerPointer(string name);
+	player* returnPlayerPointer(std::string name);
 	
 	~Hash()
 	{
@@ -48,31 +48,6 @@ public:
 			}
 		}
 	}
-	
-
-
-	/*class iterator
-	{
-	private:
-		List<HashMapNode<T>*>* mapNodes;
-		int position;
-		unsigned int operations;
-	public:
-		iterator() {
-			mapNodes = nullptr;
-			position = 0;
-		}
-		iterator(List<HashMapNode<T>*>* ptr, int pos) {
-			mapNodes = ptr;
-			position = pos;
-		}
-		iterator operator++() { iterator i = *this; position++; return i; }
-		iterator operator++(int junk) { position++; return *this; }
-		HashMapNode<T>& operator*() { return *((*mapNodes)[position]); }
-		HashMapNode<T>* operator->() { return (*mapNodes)[position]; }
-		bool operator==(const iterator& rhs) { return position == rhs.position; }
-		bool operator!=(const iterator& rhs) { return position != rhs.position; }
-	};*/
 
 };
 

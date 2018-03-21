@@ -39,7 +39,12 @@ void BSTIndent(BST &bstbyname, BST &bstbywins);
 
 std::ostream& operator<< (std::ostream &foo, player value)
 {
-	foo << left << setw(20) << value.name << " Wins: " << setw(4) << value.wins << " Losses: " << setw(4) << value.losses << " Matches: " << setw(4) << value.matches << " Win Percentage: " << setw(4) << value.winPercent << "%";
+	foo << left 
+		<< setw(20) << value.name << " Wins: " 
+		<< setw(4) << value.wins << " Losses: " 
+		<< setw(4) << value.losses << " Matches: " 
+		<< setw(4) << value.matches << " Win Percentage: " 
+		<< setw(4) << value.winPercent << "%";
 	return foo;
 }
 
@@ -188,7 +193,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 		}
 		else if (choice == 2)
 		{
-
+			removeData(hashdata, bstbyname, bstbywins, Data);
 		}
 		else if (choice == 3)
 		{
@@ -244,7 +249,7 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 		losses = matches - wins;
 		hashdata.addItem(name, matches, wins, losses, winpercent);
 		bstbyname.appendByName(name, matches, wins, losses, winpercent);
-		bstbywins.appendByName(name, matches, wins, losses, winpercent);
+		bstbywins.appendByWins(name, matches, wins, losses, winpercent);
 		adding.name = name;
 		adding.matches = matches;
 		adding.wins = wins;
@@ -264,7 +269,7 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 		winpercent = (wins * 100) / matches;
 		hashdata.addItem(name, matches, wins, losses, winpercent);
 		bstbyname.appendByName(name, matches, wins, losses, winpercent);
-		bstbywins.appendByName(name, matches, wins, losses, winpercent);
+		bstbywins.appendByWins(name, matches, wins, losses, winpercent);
 		adding.name = name;
 		adding.matches = matches;
 		adding.wins = wins;
@@ -280,7 +285,41 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 
 void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
 {
+	player adding;
+	int choice = 0;
+	string name;
+	int wins, losses = 0, winpercent = 0, matches = 0;
 
+	cout << "Enter the name of the player: ";
+	cin >> name;
+	cout << "Enter the number of wins: ";
+	cin >> wins;
+	cout << "Enter the number of losses: ";
+	cin >> losses;
+	cout << "Enter the number of matches played: ";
+	cin >> matches;
+	cout << "Enter the win percentage of the player: ";
+	cin >> winpercent;
+	adding.name = name;
+	adding.matches = matches;
+	adding.wins = wins;
+	adding.losses = losses;
+	adding.winPercent = winpercent;
+	if(Data.find(adding))
+	{
+		hashdata.removePlayer(name);
+		bool deletedbstname = bstbyname.remove(name);
+		bool deletedbstwin = bstbywins.remove(name);
+		if (deletedbstwin && deletedbstname)
+		{
+			cout << "Deleted from BST" << endl;
+		}
+		Data.remove(adding);
+	}
+	else
+	{
+		cout << "Invalid Choice Entered. Please Try Again" << endl << endl;
+	}
 }
 
 void hashFindName(Hash &hashdata)
@@ -337,3 +376,13 @@ std::ostream& operator<< (std::ostream &foo, List<T> *ListPtr)
 	return foo;
 }
 
+
+bool operator==(const player lhs, const player rhs)
+{
+	return lhs.name == rhs.name;
+}
+
+bool operator!=(const player lhs, const player rhs)
+{
+	return lhs.name != rhs.name;
+}
