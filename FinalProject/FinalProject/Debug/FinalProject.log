@@ -1,2 +1,5 @@
 ﻿  Hash.cpp
-  FinalProject.vcxproj -> C:\Users\asvle\source\repos\FinalProject\FinalProject\Debug\FinalProject.exe
+  main.cpp
+c:\users\nathan\documents\github\finalproject\finalproject\finalproject\main.cpp(227): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  FinalProject.vcxproj -> C:\Users\Nathan\Documents\GitHub\FinalProject\FinalProject\Debug\FinalProject.exe

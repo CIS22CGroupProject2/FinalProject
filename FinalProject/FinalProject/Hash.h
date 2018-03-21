@@ -21,9 +21,12 @@ private:
 		player* next;
 	};
 	player* hashTable[tableSize];
+	
 public:
 	player * location;
 	Hash();
+	int numberOfCollisions();
+
 	int hash(string key);
 	void addItem(string name, int matches, int wins, int losses, int winPercent);
 	int numberOfItemsInIndex(int index);
