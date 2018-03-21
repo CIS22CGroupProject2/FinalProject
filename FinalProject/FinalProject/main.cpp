@@ -196,7 +196,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 		}
 		else if (choice == 4)
 		{
-
+			hashdata.PrintTable();
 		}
 		else if (choice == 5)
 		{
