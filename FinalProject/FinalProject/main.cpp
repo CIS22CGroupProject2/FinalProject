@@ -208,7 +208,58 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 
 void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
 {
-
+	player adding;
+	int choice = 0;
+	string name;
+	int wins, losses, winpercent, matches;
+	cout << "Choose one of the following options: " << endl
+		<< "(1). Add Data by Matches/Win Percentage" << endl
+		<< "(2). Add Data by Wins/Losses" << endl;
+	cin >> choice;
+	if (choice == 1)
+	{
+		cout << "Enter the name of the player: ";
+		cin >> name;
+		cout << "Enter the number of matches played: ";
+		cin >> matches;
+		cout << "Enter the win percentage of the player: ";
+		cin >> winpercent;
+		wins = winpercent * matches * 0.01;
+		losses = matches - wins;
+		hashdata.addItem(name, matches, wins, losses, winpercent);
+		bstbyname.appendByName(name, matches, wins, losses, winpercent);
+		bstbywins.appendByName(name, matches, wins, losses, winpercent);
+		adding.name = name;
+		adding.matches = matches;
+		adding.wins = wins;
+		adding.losses = losses;
+		adding.winPercent = winpercent;
+		Data.push_back(adding);
+	}
+	else if (choice == 2)
+	{
+		cout << "Enter the name of the player: ";
+		cin >> name;
+		cout << "Enter the number of wins: ";
+		cin >> wins;
+		cout << "Enter the number of losses: ";
+		cin >> losses;
+		matches = wins + losses;
+		winpercent = (wins * 100) / matches;
+		hashdata.addItem(name, matches, wins, losses, winpercent);
+		bstbyname.appendByName(name, matches, wins, losses, winpercent);
+		bstbywins.appendByName(name, matches, wins, losses, winpercent);
+		adding.name = name;
+		adding.matches = matches;
+		adding.wins = wins;
+		adding.losses = losses;
+		adding.winPercent = winpercent;
+		Data.push_back(adding);
+	}
+	else
+	{
+		cout << "Invalid Choice Entered. Please Try Again" << endl << endl;
+	}
 }
 
 void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
