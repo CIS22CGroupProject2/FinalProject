@@ -19,6 +19,15 @@ Hash::Hash()
 	}
 }
 
+int Hash::numberOfCollisions()
+{
+	int count = 0;
+	for (int i = 0; i <= tableSize; i++)
+	{
+		count += numberOfItemsInIndex(i);
+	}
+	return count;
+}
 int Hash::hash(string key)
 {
 	int hash = 0;
@@ -43,6 +52,7 @@ void Hash::addItem(string name, int matches, int wins, int losses, int winPercen
 		hashTable[index]->wins = wins;
 		hashTable[index]->losses = losses;
 		hashTable[index]->winPercent = winPercent;
+
 	}
 	else
 	{
@@ -54,11 +64,17 @@ void Hash::addItem(string name, int matches, int wins, int losses, int winPercen
 		n->losses = losses;
 		n->winPercent = winPercent;
 		n->next = NULL;
+		// to keey track of # of colliosions
+		 // for load factor + collisions
+		int i = 0;
 		while (Ptr->next != NULL)
 		{
 			Ptr = Ptr->next;
+			i++;
 		}
+
 		Ptr->next = n;
+		
 	}
 }
 
