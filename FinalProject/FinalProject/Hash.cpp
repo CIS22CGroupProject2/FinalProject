@@ -30,7 +30,6 @@ int Hash::numberOfCollisions()
 }
 int Hash::hash(string key)
 {
-	cout << key;
 	int hash = 0;
 	int index;
 
@@ -104,16 +103,21 @@ void Hash::PrintTable()
 	int number;
 	for (int i = 0; i < tableSize; i++)
 	{
+		player* y = hashTable[i];
 		number = numberOfItemsInIndex(i);
-		cout << "*********************" << endl;
-		cout << "index = " << i << endl;
-		cout << hashTable[i]->name << endl;
-		cout << "Number of matches played: " << hashTable[i]->matches << endl;
-		cout << "Number of wins: " << hashTable[i]->wins << endl;
-		cout << "Number of losses: " << hashTable[i]->losses << endl;
-		cout << "Win Percentage: " << hashTable[i]->winPercent << "%" << endl;
-		cout << "# of items = " << number << endl;
-		cout << "*********************" << endl;
+		for (int x = 0; x < number; x++)
+		{
+			cout << "*********************" << endl;
+			cout << "index = " << i << endl;
+			cout << y->name << endl;
+			cout << "Number of matches played: " <<y->matches << endl;
+			cout << "Number of wins: " << y->wins << endl;
+			cout << "Number of losses: " << y->losses << endl;
+			cout << "Win Percentage: " << y->winPercent << "%" << endl;
+			cout << "# of items = " << number << endl;
+			cout << "*********************" << endl;
+			y = y->next;
+		}
 	}
 }
 

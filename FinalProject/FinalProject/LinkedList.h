@@ -373,4 +373,5 @@ List<T>::~List()
 {
 	clear();
 }
+
 #endif // !LINKEDLIST_H
