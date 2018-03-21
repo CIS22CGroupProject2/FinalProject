@@ -23,6 +23,10 @@ private:
 	player* hashTable[tableSize];
 	
 public:
+	unsigned int operationsTotal = 0;
+	unsigned int operationsInsert = 0;
+	unsigned int operationsFind = 0;
+	unsigned int operationsDelete = 0;
 	player * location;
 	Hash();
 	int numberOfCollisions();

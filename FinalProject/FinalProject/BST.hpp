@@ -23,6 +23,10 @@ private:
 	BSTNode *root;
 
 public:
+	unsigned int operationsTotal = 0;
+	unsigned int operationsInsert = 0;
+	unsigned int operationsFind = 0;
+	unsigned int operationsDelete = 0;
 	//defautl constructor
 	BST() { root = nullptr; count = 0; }
 

@@ -172,8 +172,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	cout << "(5). List data in key sequence(sorted)" << endl;
 	cout << "(6). Print indented tree" << endl;
 	cout << "(7). Efficiency" << endl;
-	cout << "(8). <Team choice menu option>" << endl;
-	cout << "(9). Quit" << endl;
+	cout << "(8). Quit" << endl;
 	cin >> choice;
 	if (choice < 1 || choice > 9)
 	{
@@ -214,10 +213,6 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 
 		}
 		else if (choice == 8)
-		{
-
-		}
-		else if (choice == 9)
 		{
 			inloop = false;
 		}

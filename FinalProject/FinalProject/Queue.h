@@ -15,6 +15,10 @@ template <class T>
 class Queue : protected List<T>
 {
 public:
+	unsigned int operationsTotal = 0;
+	unsigned int operationsInsert = 0;
+	unsigned int operationsFind = 0;
+	unsigned int operationsDelete = 0;
 	Queue();
 	~Queue();
 	bool enqueue(newEntry);

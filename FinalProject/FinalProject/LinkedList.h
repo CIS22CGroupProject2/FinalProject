@@ -30,6 +30,10 @@ private:
 	Node<T> *tail;
 	int itemCount;
 public:
+	unsigned int operationsTotal = 0;
+	unsigned int operationsInsert = 0;
+	unsigned int operationsFind = 0;
+	unsigned int operationsDelete = 0;
 	bool empty();
 	int size() const;
 	bool push_back(T newEntry);

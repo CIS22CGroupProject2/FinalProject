@@ -22,6 +22,10 @@ protected:
 	T data;
 	LLNode<T> *pNext;
 public:
+	unsigned int operationsTotal = 0;
+	unsigned int operationsInsert = 0;
+	unsigned int operationsFind = 0;
+	unsigned int operationsDelete = 0;
 	//constructor
 	// initilizes data nd Pnext
 	LLNode(T x) { data = x; pNext = nullptr; }

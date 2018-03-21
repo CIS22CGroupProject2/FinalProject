@@ -9,6 +9,7 @@
 #include <iostream>
 #include "LinkedList.h"
 
+
 class BSTNode
 {
 private:
@@ -19,6 +20,10 @@ private:
 	BSTNode *right;
 
 public:
+	unsigned int operationsTotal = 0;
+	unsigned int operationsInsert = 0;
+	unsigned int operationsFind = 0;
+	unsigned int operationsDelete = 0;
 	//default constructor
 	BSTNode() {}
 	//constructor
