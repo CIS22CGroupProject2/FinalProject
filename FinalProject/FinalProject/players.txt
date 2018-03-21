@@ -1,7 +1,8 @@
--A_Seagull
--Overall Matches --- 152 
--Win / Loss Record --- 87--65
--Winning Percentage --- 57% 
+A_Seagull
+Overall Matches --- 152 
+Win / Loss Record --- 87--65
+Winning Percentage --- 57% 
+
 ash
 Overall Matches --- 100 
 Win / Loss Record --- 59--41
