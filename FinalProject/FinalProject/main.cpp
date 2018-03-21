@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 #include "BST.hpp"
 #include "LinkedList.h"
 #include "Hash.h"
@@ -12,24 +13,33 @@ struct player
 	int matches, wins, losses, winPercent;
 	player* next;
 };
-//void BinaryTest();
 
 //File Input/Output
 void fileInput(List<struct player> &Data, Hash &hashdata);
 void fileExport(List<struct player> &Data);
 //Data transfer
-void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins);
-//Modifying Functions
-void deletePlayerFromHash(Hash&);
-void findPlayerFromHash(Hash&);
+void toBST(List<struct player> &Data, BST &bstbyname, BST &bstbywins);
 //Test Function
 void testBST(BST&);
 //Selection UI
 bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data);
+//Adding Data
+void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data);
+//Removing Data
+void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data);
+//Display One Data Point
+void hashFindName(Hash &hashdata);
+//Display Hash Map
+void hashPrint(Hash &hashdata);
+//Display Sorted Data with BST
+void BSTPrint(BST &bstbyname, BST &bstbywins);
+//Display BST Tree with Indentations
+void BSTIndent(BST &bstbyname, BST &bstbywins);
+//Display Efficiency
 
 std::ostream& operator<< (std::ostream &foo, player value)
 {
-	foo << value.name;
+	foo << left << setw(20) << value.name << " Wins: " << setw(4) << value.wins << " Losses: " << setw(4) << value.losses << " Matches: " << setw(4) << value.matches << " Win Percentage: " << setw(4) << value.winPercent << "%";
 	return foo;
 }
 
@@ -43,8 +53,8 @@ int main()
 	BST bstbywins;
 	bool inloop = true;
 	fileInput(Data, hashdata);
-	toBST(hashdata, bstbyname, bstbywins);
-	cout << &Data;
+	toBST(Data, bstbyname, bstbywins);
+	cout << "Printing list of players inputted" << endl << &Data;
 	while (inloop == true)
 	{
 		inloop = menu(hashdata, bstbyname, bstbywins, Data);
@@ -70,7 +80,7 @@ void fileInput(List<player> &Data, Hash &hashdata)
 	}
 	else
 	{
-		cout << "Reading File" << endl;
+		cout << "Reading File...." << endl << endl;
 		while (!infile.eof())
 		{
 			getline(infile, adding.name);
@@ -103,9 +113,11 @@ void fileInput(List<player> &Data, Hash &hashdata)
 			count++;
 		}
 
-		cout << count << endl;
+		cout << endl << count << " items were found in the file..." << endl << endl;
+		system("pause");
 	}
 }
+
 void fileExport(List<struct player> &Data)
 {
 	ofstream outfile;
@@ -117,10 +129,18 @@ void fileExport(List<struct player> &Data)
 		exit(3);
 	}
 }
-void toBST(Hash &hashdata, BST &bstbyname, BST &bstbywins)
-{
 
+void toBST(List<struct player> &Data, BST &bstbyname, BST &bstbywins)
+{
+	Node<struct player> *currPtr = Data.getTail();
+	while (currPtr != nullptr)
+	{
+		bstbyname.appendByName(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
+		bstbyname.appendByWins(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
+		currPtr = currPtr->next;
+	}
 }
+
 bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
 {
 	bool inloop = true;
@@ -130,7 +150,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	cout << "(2). Delete data" << endl;
 	cout << "(3). Find and display one data record using the primary key" << endl;
 	cout << "(4). List data in hash table sequence" << endl;
-	cout << "(5). List data in key sequence(sorted)" << endl;
+	cout << "(5). List data in key sequence(sorted) by name" << endl;
 	cout << "(6). Print indented tree" << endl;
 	cout << "(7). Efficiency" << endl;
 	cout << "(8). <Team choice menu option>" << endl;
@@ -148,37 +168,37 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	{
 		if (choice == 1)
 		{
-
+			
 		}
-		if (choice == 2)
+		else if (choice == 2)
 		{
 
 		}
-		if (choice == 3)
+		else if (choice == 3)
 		{
 
 		}
-		if (choice == 4)
+		else if (choice == 4)
 		{
 
 		}
-		if (choice == 5)
+		else if (choice == 5)
 		{
 
 		}
-		if (choice == 6)
+		else if (choice == 6)
 		{
 
 		}
-		if (choice == 7)
+		else if (choice == 7)
 		{
 
 		}
-		if (choice == 8)
+		else if (choice == 8)
 		{
 
 		}
-		if (choice == 9)
+		else if (choice == 9)
 		{
 			inloop = false;
 		}
@@ -186,28 +206,51 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	return inloop;
 }
 
-void deletePlayerFromHash(Hash &hashdata)
+void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
 {
-	string name;
-	hashdata.PrintTable();
-	cout << "remove a player: ";
-	cin >> name;
-	hashdata.removePlayer(name);
-	hashdata.PrintTable();
-}
-void findPlayerFromHash(Hash &hashdata)
-{
-	string name;
-	hashdata.printEachName();
-	cout << "search for a player: ";
-	cin >> name;
-	hashdata.FindPlayer(name);
+
 }
 
-
-void testBST(BST &tree1)
+void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data)
 {
-	tree1.breadth();
+
+}
+
+void hashFindName(Hash &hashdata)
+{
+	string name;
+	cout << "Enter the name of the player you are trying to find: ";
+	cin >> name;
+	player *Ptr = hashdata.FindPlayer(name);
+	if (Ptr != NULL)
+	{
+		cout << "*********************" << endl;
+		cout << name << endl;
+		cout << "Number of matches played: " << Ptr->matches << endl;
+		cout << "Number of wins: " << Ptr->wins << endl;
+		cout << "Number of losses: " << Ptr->losses << endl;
+		cout << "Win Percentage: " << Ptr->winPercent << "%" << endl;
+		cout << "*********************" << endl;
+	}
+	else
+	{
+		cout << name << "'s info was not found in the hash table" << endl;
+	}
+}
+
+void hashPrint(Hash &hashdata)
+{
+
+}
+
+void BSTPrint(BST &bstbyname, BST &bstbywins)
+{
+
+}
+
+void BSTIndent(BST &bstbyname, BST &bstbywins)
+{
+
 }
 
 //******************************************************
@@ -226,7 +269,12 @@ std::ostream& operator<< (std::ostream &foo, List<T> *ListPtr)
 		while (currPtr != nullptr)
 		{
 			itemCount++;
-			foo << itemCount << ". " << (currPtr->value) << endl;
+			foo << itemCount << ". ";
+			if (itemCount < 10)
+			{
+				foo << " ";
+			}
+			foo << (currPtr->value) << endl;
 			currPtr = currPtr->next;
 		}
 	}

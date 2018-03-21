@@ -125,7 +125,7 @@ void Hash::PrintItemsInIndex(int index)
 	}
 }
 
-void Hash::FindPlayer(string name)
+Hash::player* Hash::FindPlayer(string name)
 {
 	int index = hash(name);
 	bool foundName = false;
@@ -144,20 +144,7 @@ void Hash::FindPlayer(string name)
 		}
 		Ptr = Ptr->next;
 	}
-	if (foundName == true)
-	{
-		cout << "*********************" << endl;
-		cout << name << endl;
-		cout << "Number of matches played: " << matches << endl;
-		cout << "Number of wins: " << wins << endl;
-		cout << "Number of losses: " << losses << endl;
-		cout << "Win Percentage: " <<winPercent << "%" << endl;
-		cout << "*********************" << endl;
-	}
-	else
-	{
-		cout << name << "'s info was not found in the hash table" << endl;
-	}
+	return Ptr;
 }
 
 Hash::player* Hash::returnPlayerPointer(string name)

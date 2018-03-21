@@ -22,13 +22,14 @@ private:
 	};
 	player* hashTable[tableSize];
 public:
+	player * location;
 	Hash();
 	int hash(string key);
 	void addItem(string name, int matches, int wins, int losses, int winPercent);
 	int numberOfItemsInIndex(int index);
 	void PrintTable();
 	void PrintItemsInIndex(int index);
-	void FindPlayer(string name);
+	player* Hash::FindPlayer(string name);
 	void removePlayer(string name);
 	void printEachName();
 	player* returnPlayerPointer(string name);
