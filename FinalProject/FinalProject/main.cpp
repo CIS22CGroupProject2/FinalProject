@@ -154,7 +154,7 @@ void toBST(List<struct player> &Data, BST &bstbyname, BST &bstbywins)
 	Node<struct player> *currPtr = Data.getTail();
 	while (currPtr != nullptr)
 	{
-		bstbywins.appendByName(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
+		bstbywins.appendByWins(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
 		bstbyname.appendByName(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
 		currPtr = currPtr->next;
 	}
@@ -203,7 +203,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 		}
 		else if (choice == 5)
 		{
-
+			BSTPrint(bstbyname, bstbywins);
 		}
 		else if (choice == 6)
 		{
@@ -288,7 +288,6 @@ void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct play
 	player adding;
 	int choice = 0;
 	string name;
-	int wins, losses = 0, winpercent = 0, matches = 0;
 
 	cout << "Enter the name of the player: ";
 	cin >> name;
@@ -348,11 +347,11 @@ void BSTPrint(BST &bstbyname, BST &bstbywins)
 	cin >> choice;
 	if (choice == 1)
 	{
-		bstbyname.breadth();
+		bstbyname.displayInOrder();
 	}
 	else if (choice == 2)
 	{
-
+		bstbywins.displayInOrder();
 	}
 	else
 	{

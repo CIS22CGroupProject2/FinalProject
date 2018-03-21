@@ -11,6 +11,7 @@
 #include "Queue.hpp"
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -223,12 +224,13 @@ void BST::inOrder(BSTNode *nodePtr) const
 	{
 		inOrder(nodePtr->getLeft());
 
-		cout << nodePtr->getName() << endl;
-		cout << nodePtr->getMatches() << endl;
-		cout << nodePtr->getWins() << endl;
-		cout << nodePtr->getLosses() << endl;
-		cout << nodePtr->getWinPercent() << endl;
-		
+		cout << std::left
+			<< setw(20) << nodePtr->getName() << " Matches: "
+			<< setw(4) << nodePtr->getMatches() << " Wins: "
+			<< setw(4) << nodePtr->getWins() << " Losses: "
+			<< setw(4) << nodePtr->getLosses() << " Win Percentage: "
+			<< setw(4) << nodePtr->getWinPercent() << "%";
+		cout << endl;
 		inOrder(nodePtr->getRight());
 
 		
@@ -335,10 +337,10 @@ void BST::deletion(BSTNode *nodePtr)
 		temp = nodePtr->getRight();
 
 		// get to end of left
-		while (nodePtr->getLeft() !=nullptr)
+		while (temp->getLeft() !=nullptr)
 		{
 			temp = nodePtr->getLeft();
-
+			
 		}
 		// reattach left subtree
 		temp->setLeft(nodePtr->getLeft());
