@@ -29,8 +29,6 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &Data);
 //Display One Data Point
 void hashFindName(Hash &hashdata);
-//Display Hash Map
-void hashPrint(Hash &hashdata);
 //Display Sorted Data with BST
 void BSTPrint(BST &bstbyname, BST &bstbywins);
 //Display BST Tree with Indentations
@@ -240,7 +238,8 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 	if (choice == 1)
 	{
 		cout << "Enter the name of the player: ";
-		cin >> name;
+		cin.ignore();
+		getline(cin, name);
 		cout << "Enter the number of matches played: ";
 		cin >> matches;
 		cout << "Enter the win percentage of the player: ";
@@ -260,7 +259,8 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 	else if (choice == 2)
 	{
 		cout << "Enter the name of the player: ";
-		cin >> name;
+		cin.ignore();
+		getline(cin, name);
 		cout << "Enter the number of wins: ";
 		cin >> wins;
 		cout << "Enter the number of losses: ";
@@ -331,20 +331,33 @@ void hashFindName(Hash &hashdata)
 	string name;
 	int index;
 	cout << "Enter the name of the player you are trying to find: ";
-	cin >> name;
+	cin.ignore();
+	getline(cin, name);
 	cout << endl << endl;
 	index = hashdata.hash(name);
 	hashdata.FindPlayer(index, name);
 }
 
-void hashPrint(Hash &hashdata)
-{
-
-}
 
 void BSTPrint(BST &bstbyname, BST &bstbywins)
 {
+	int choice;
+	cout << "Choose one of the following options: " << endl
+		<< "(1). Print Sorted by Name" << endl
+		<< "(2). Print Sorted by Wins" << endl;
+	cin >> choice;
+	if (choice == 1)
+	{
+		bstbyname.breadth();
+	}
+	else if (choice == 2)
+	{
 
+	}
+	else
+	{
+		cout << "An incorrect choice was selected" << endl;
+	}
 }
 
 void BSTIndent(BST &bstbyname, BST &bstbywins)
