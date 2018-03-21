@@ -156,8 +156,8 @@ void toBST(List<struct player> &Data, BST &bstbyname, BST &bstbywins)
 	Node<struct player> *currPtr = Data.getTail();
 	while (currPtr != nullptr)
 	{
+		bstbywins.appendByName(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
 		bstbyname.appendByName(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
-		bstbyname.appendByWins(currPtr->value.name, currPtr->value.matches, currPtr->value.wins, currPtr->value.losses, currPtr->value.winPercent);
 		currPtr = currPtr->next;
 	}
 }
@@ -245,7 +245,7 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 		cin >> matches;
 		cout << "Enter the win percentage of the player: ";
 		cin >> winpercent;
-		wins = winpercent * matches * 0.01;
+		wins =(int)( winpercent * matches * 0.01);
 		losses = matches - wins;
 		hashdata.addItem(name, matches, wins, losses, winpercent);
 		bstbyname.appendByName(name, matches, wins, losses, winpercent);
@@ -292,6 +292,7 @@ void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct play
 
 	cout << "Enter the name of the player: ";
 	cin >> name;
+	/*
 	cout << "Enter the number of wins: ";
 	cin >> wins;
 	cout << "Enter the number of losses: ";
@@ -300,11 +301,14 @@ void removeData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct play
 	cin >> matches;
 	cout << "Enter the win percentage of the player: ";
 	cin >> winpercent;
+	*/
 	adding.name = name;
+	/*
 	adding.matches = matches;
 	adding.wins = wins;
 	adding.losses = losses;
 	adding.winPercent = winpercent;
+	*/
 	if(Data.find(adding))
 	{
 		hashdata.removePlayer(name);

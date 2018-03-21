@@ -264,12 +264,12 @@ bool BST::remove(string n)
 bool BST::deleteNode(string n, BSTNode *nodePtr)
 {
 	bool x = false;
-	if (n < nodePtr->getName() && nodePtr != NULL)
+	if (n < nodePtr->getName() )//&& nodePtr != NULL)
 	{
 		x = deleteNode(n, nodePtr->getLeft());
 
 	}
-	else if (n > nodePtr->getName() && nodePtr != NULL)
+	else if (n > nodePtr->getName())// && nodePtr != NULL)
 	{
 		x = deleteNode(n, nodePtr->getRight());
 	}
