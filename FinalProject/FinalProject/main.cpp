@@ -238,7 +238,8 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 	if (choice == 1)
 	{
 		cout << "Enter the name of the player: ";
-		cin >> name;
+		cin.ignore();
+		getline(cin, name);
 		cout << "Enter the number of matches played: ";
 		cin >> matches;
 		cout << "Enter the win percentage of the player: ";
@@ -258,7 +259,8 @@ void addData(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player>
 	else if (choice == 2)
 	{
 		cout << "Enter the name of the player: ";
-		cin >> name;
+		cin.ignore();
+		getline(cin, name);
 		cout << "Enter the number of wins: ";
 		cin >> wins;
 		cout << "Enter the number of losses: ";
@@ -325,7 +327,8 @@ void hashFindName(Hash &hashdata)
 	string name;
 	int index;
 	cout << "Enter the name of the player you are trying to find: ";
-	cin >> name;
+	cin.ignore();
+	getline(cin, name);
 	cout << endl << endl;
 	index = hashdata.hash(name);
 	hashdata.FindPlayer(index, name);
@@ -341,7 +344,7 @@ void BSTPrint(BST &bstbyname, BST &bstbywins)
 	cin >> choice;
 	if (choice == 1)
 	{
-		bstbyname.
+		bstbyname.breadth();
 	}
 	else if (choice == 2)
 	{
