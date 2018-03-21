@@ -42,12 +42,18 @@ public:
 	
 
 	// display a post order traversal of BST
-	void displayPostOrder(ofstream &ofs) const
+	void displayPostOrder() const
 	{
-		PostOrder(root, ofs);
+		PostOrder(root);
 	}
 
-	void PostOrder(BSTNode *nodePtr, ofstream &ofs) const;
+	void PostOrder(BSTNode *nodePtr) const;
+
+	void displayInOrder() const
+	{
+		inOrder(root);
+	}
+	void inOrder(BSTNode *nodePtr) const;
 
 
 	// for breadth traversals
@@ -194,13 +200,13 @@ void BST::appendByWins(string n, int m, int w, int l, int wp)
 //*****************************************
 // to display a post order traversal
 //*****************************************
-void BST::PostOrder(BSTNode *nodePtr, ofstream &ofs) const
+void BST::PostOrder(BSTNode *nodePtr) const
 {
 
 	if (nodePtr)
 	{
-		PostOrder(nodePtr->getLeft(), ofs);
-		PostOrder(nodePtr->getRight(), ofs);
+		PostOrder(nodePtr->getLeft());
+		PostOrder(nodePtr->getRight());
 
 		// write to commad scrn
 		cout << nodePtr->getName() << endl;
@@ -208,14 +214,26 @@ void BST::PostOrder(BSTNode *nodePtr, ofstream &ofs) const
 		cout << nodePtr->getWins() << endl;
 		cout << nodePtr->getLosses() << endl;
 		cout << nodePtr->getWinPercent() << endl;
-
-		// write to output files
-		ofs << nodePtr->getName() << endl;
-		ofs << nodePtr->getMatches() << endl;
-		ofs << nodePtr->getWins() << endl;
-		ofs << nodePtr->getLosses() << endl;
-		ofs << nodePtr->getWinPercent() << endl;
 	}
+}
+
+void BST::inOrder(BSTNode *nodePtr) const
+{
+	if (nodePtr)
+	{
+		inOrder(nodePtr->getLeft());
+
+		cout << nodePtr->getName() << endl;
+		cout << nodePtr->getMatches() << endl;
+		cout << nodePtr->getWins() << endl;
+		cout << nodePtr->getLosses() << endl;
+		cout << nodePtr->getWinPercent() << endl;
+		
+		inOrder(nodePtr->getRight());
+
+		
+	}
+
 }
 //*****************************************
 // to search if a value/data exists within
@@ -317,7 +335,7 @@ void BST::deletion(BSTNode *nodePtr)
 		temp = nodePtr->getRight();
 
 		// get to end of left
-		while (nodePtr->getLeft())
+		while (nodePtr->getLeft() !=nullptr)
 		{
 			temp = nodePtr->getLeft();
 
