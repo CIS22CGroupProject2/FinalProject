@@ -6,6 +6,8 @@
 #include "LinkedList.h"
 #include "Hash.h"
 
+int totaloperations = 0;
+
 using namespace std;
 struct player
 {
@@ -60,6 +62,7 @@ int main()
 	while (inloop == true)
 	{
 		inloop = menu(hashdata, bstbyname, bstbywins, Data);
+		totaloperations += 3;
 	}
 	fileExport(Data);
 	
@@ -89,23 +92,27 @@ void fileInput(List<player> &Data, Hash &hashdata)
 			for (int x = 0; x < 17; x++)
 			{
 				infile >> taking;
+				totaloperations += 3;
 			}
 			infile >> adding.matches;
 			getline(infile, taking1);
 			for (int x = 0; x < 17; x++)
 			{
 				infile >> taking;
+				totaloperations += 3;
 			}
 			infile >> adding.wins;
 			for (int x = 0; x < 2; x++)
 			{
 				infile >> taking;
+				totaloperations += 3;
 			}
 			infile >> adding.losses;
 			getline(infile, taking1);
 			for (int x = 0; x < 20; x++)
 			{
 				infile >> taking;
+				totaloperations += 3;
 			}
 			infile >> adding.winPercent;
 			getline(infile, taking1);
@@ -114,7 +121,7 @@ void fileInput(List<player> &Data, Hash &hashdata)
 			hashdata.addItem(adding.name, adding.matches, adding.wins, adding.losses, adding.winPercent);
 			count++;
 		}
-
+		
 		cout << endl << count << " items were found in the file..." << endl << endl;
 		system("pause");
 	}
@@ -387,6 +394,7 @@ void PrintEfficiency(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct
 	total += hashdata.operationsTotal;
 	total += bstbyname.operationsTotal;
 	total += bstbywins.operationsTotal;
+	total += totaloperations;
 	cout << "The total number of operations performed is " << total << " operations" << endl << endl;
 	cout << "The total number of collions is " << hashdata.numberOfCollisions() << endl << endl;
 }
@@ -414,6 +422,7 @@ std::ostream& operator<< (std::ostream &foo, List<T> *ListPtr)
 			}
 			foo << (currPtr->value) << endl;
 			currPtr = currPtr->next;
+			totaloperations += 5;
 		}
 	}
 	return foo;
