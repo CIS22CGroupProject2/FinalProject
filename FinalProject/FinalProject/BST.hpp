@@ -40,7 +40,7 @@ public:
 	void appendByName(string n, int m, int w, int l, int wp);
 	void appendByWins(string n, int m, int w, int l, int wp);
 
-	
+	void PreOrder(BSTNode *nodePtr, int level = 0) const;
 
 	// display a post order traversal of BST
 	void displayPostOrder() const
@@ -49,7 +49,10 @@ public:
 	}
 
 	void PostOrder(BSTNode *nodePtr) const;
-
+	void displayPreOrder() const
+	{
+		PreOrder(root);
+	}
 	void displayInOrder() const
 	{
 		inOrder(root);
@@ -237,6 +240,29 @@ void BST::inOrder(BSTNode *nodePtr) const
 	}
 
 }
+
+//*****************************************
+// to display a pre order traversal
+//*****************************************
+void BST::PreOrder(BSTNode *nodePtr, int level) const
+{
+	level++;
+	if (nodePtr)
+	{
+		for (int x = 0; x < level; x++)
+		{
+			cout << " ";
+		}
+		cout << nodePtr->getName();
+		cout << " Wins: ";
+		cout << nodePtr->getWins() << endl;
+
+		PreOrder(nodePtr->getLeft(), level);
+		PreOrder(nodePtr->getRight(), level);
+
+	}
+}
+
 //*****************************************
 // to search if a value/data exists within
 // the BST. returns true/false.

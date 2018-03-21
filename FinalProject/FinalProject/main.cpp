@@ -169,7 +169,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 	cout << "(2). Delete data" << endl;
 	cout << "(3). Find and display one data record using the primary key" << endl;
 	cout << "(4). List data in hash table sequence" << endl;
-	cout << "(5). List data in key sequence(sorted) by name" << endl;
+	cout << "(5). List data in key sequence(sorted)" << endl;
 	cout << "(6). Print indented tree" << endl;
 	cout << "(7). Efficiency" << endl;
 	cout << "(8). <Team choice menu option>" << endl;
@@ -207,7 +207,7 @@ bool menu(Hash &hashdata, BST &bstbyname, BST &bstbywins, List<struct player> &D
 		}
 		else if (choice == 6)
 		{
-
+			BSTIndent(bstbyname, bstbywins);
 		}
 		else if (choice == 7)
 		{
@@ -361,7 +361,24 @@ void BSTPrint(BST &bstbyname, BST &bstbywins)
 
 void BSTIndent(BST &bstbyname, BST &bstbywins)
 {
-
+	int choice;
+	cout << "Choose one of the following options: " << endl
+		<< "(1). Print Indented by Name" << endl
+		<< "(2). Print Indented by Wins" << endl;
+	cin >> choice;
+	if (choice == 1)
+	{
+		bstbyname.displayPreOrder();
+		
+	}
+	else if (choice == 2)
+	{
+		bstbywins.displayPreOrder();
+	}
+	else
+	{
+		cout << "An incorrect choice was selected" << endl;
+	}
 }
 
 //******************************************************
