@@ -69,7 +69,7 @@ int main()
 	system("pause");
 }
 
-void fileInput(List<player> &Data, Hash &hashdata)
+void fileInput(List<player> &Data, Hash &hashdata) //
 {
 	ifstream infile;
 	int count = 0;
